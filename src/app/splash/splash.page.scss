@@ -1,0 +1,44 @@
+.class1{
+    background-image: url(/assets/img3.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 500px;
+    height: 700px;
+    left: 0px;
+    top: -50px;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
+  
+p{
+    margin-top: 10px;
+    font-size: 18px;
+    color: #666;
+}
+
+
+
+
+
+/*
+ion-spinner {
+    width: 100px;
+    height: 50px;
+    
+  }
+
+
+width: 2550px;
+height: 1919px;
+left: -354px;
+top: -101px;
+*/
+
