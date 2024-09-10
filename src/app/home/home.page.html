@@ -1,21 +1,29 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>HOME</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Previous" icon="caret-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Back Button</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <!--
+<ion-content>
+  <!-- Imagen de fondo del mapa -->
+  <div class="map-background">
+    <!-- Botón circular para navegar a otra página -->
+    <ion-fab style="top: 300px; right: 80px;">
+      <ion-fab-button (click)="navigateToOtherPage()">
+        <ion-icon name="navigate-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+  <!-- 
+  <ion-footer>
     <ion-toolbar>
-      <ion-title size="large">splashl</ion-title>
-    </ion-toolbar> -->
-    <div class="class1">
-    </div>
-    <ion-content>
-      
-        <p>HOME HOME HOME</p>
-      
-    </ion-content>
-  </ion-header>
-</ion-content>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>-->

@@ -14,7 +14,8 @@ export class LoginPage implements OnInit {
 }*/
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { SessionManager } from 'src/managers/SessionManager';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ import { Router } from '@angular/router'
 export class LoginPage {
   loginForm: FormGroup;
 
-  constructor(private router: Router,private formBuilder: FormBuilder) {
+  constructor(private router: Router,private formBuilder: FormBuilder,private sessionManager: SessionManager) {
     // RECORDAR QUE ESTO ES FORMULARIO
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -35,11 +36,11 @@ export class LoginPage {
   }
   // Método para iniciar sesión
   onLogin() {
-    if (this.loginForm.valid) {
+    if (this.loginForm.valid ) {
       const { username, password } = this.loginForm.value;
       
       // logica autentificacion (por ahora)
-      if (username === 'user' && password === 'pass') {
+      if (this.sessionManager.performLogin(username, password)) {
         console.log('Inicio de sesión exitoso');
         // Redirigir al home
         this.router.navigate(['/home']); 
