@@ -1,0 +1,40 @@
+.image-container {
+    position: relative;
+    text-align: center;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 400px; /* Ajusta el ancho máximo de la imagen */
+  }
+  
+  .custom-image {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .image-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+    color: white;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .comments-section {
+    padding: 20px;
+  }
+  
+  .comments-section h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  ion-item {
+    --background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+ 

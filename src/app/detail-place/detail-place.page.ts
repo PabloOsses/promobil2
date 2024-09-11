@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detail-place.page.scss'],
 })
 export class DetailPlacePage implements OnInit {
-
+  comentarios = [
+    { usuario: 'Juana', texto: '¡Gran imagen!' },
+    { usuario: 'Esteban', texto: 'No me gusta' },
+    { usuario: 'Lucho', texto: 'BAGUETTE BAGUETTE BAGUETTE BAGUETTE' }
+  ];
   constructor() { }
 
   ngOnInit() {

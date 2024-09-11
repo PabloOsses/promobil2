@@ -8,5 +8,9 @@ ion-content {
   background-position: center;
   height: 100%;
 }
+.fab-button-with-border {
+  border: 5px solid blue; /* Aplica un borde azul al botón FAB */
+  border-radius: 50%;  /*PARA QUE SE MANTENGA COMO UN CIRCULO*/ 
+}
 
 

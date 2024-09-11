@@ -10,6 +10,6 @@ export class HomePage {
 
   constructor(private router: Router) {}
   navigateToOtherPage() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/detail-place']);
   }
 }
