@@ -1,17 +1,4 @@
-/*import { Component, OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
-})
-export class LoginPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-}*/
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -43,7 +30,8 @@ export class LoginPage {
       if (this.sessionManager.performLogin(username, password)) {
         console.log('Inicio de sesión exitoso');
         // Redirigir al home
-        this.router.navigate(['/home']); 
+        //this.router.navigate(['/home']); 
+        this.router.navigate(['/home'], {queryParams: { user: username }});
       } else {
         console.log('Credenciales incorrectas');
         // Muestra un mensaje de error o realiza alguna acción

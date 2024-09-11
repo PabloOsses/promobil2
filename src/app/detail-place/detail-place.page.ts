@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailPlacePage implements OnInit {
   comentarios = [
-    { usuario: 'Juana', texto: '¡Gran imagen!' },
+    { usuario: 'Juana', texto: '¡Gran lugar!' },
     { usuario: 'Esteban', texto: 'No me gusta' },
-    { usuario: 'Lucho', texto: 'BAGUETTE BAGUETTE BAGUETTE BAGUETTE' }
+    { usuario: 'Lucho', texto: 'BAGUETTE BAGUETTE BAGUETTE BAGUETTE' },
+    { usuario: 'Prueba', texto: 'COMENTARIO COMENTARIO COMENTARIO COMENTARIO' }
   ];
   constructor() { }
 

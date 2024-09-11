@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -8,7 +8,14 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(private router: Router) {}
+  usuario: string = '';
+  constructor(private router: Router,private route: ActivatedRoute) {}
+  ngOnInit() {
+    this.route.queryParams.subscribe( params=> {
+      this.usuario = params['user'] || '';
+    });
+  }
+
   navigateToOtherPage() {
     this.router.navigate(['/detail-place']);
   }
