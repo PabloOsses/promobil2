@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -7,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterPage implements OnInit {
   registerForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,) { 
+  constructor(private formBuilder: FormBuilder,private router: Router) { 
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -23,11 +24,12 @@ export class RegisterPage implements OnInit {
     if (this.registerForm.valid) {
       // Lógica para manejar el registro
       console.log('Formulario de registro válido');
+      this.router.navigate(['/login']);
     }
   }
 
   goToLogin() {
-    // Navegación hacia la vista de login
+    this.router.navigate(['/login']);
   }
 
 }

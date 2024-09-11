@@ -1,13 +1,5 @@
-.class1{
-    background-image: url(/assets/img3.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: absolute;
-    width: 500px;
-    height: 700px;
-    left: 0px;
-    top: -50px;
+.background-image {
+  --background: url(/assets/img3.png) no-repeat center center / cover;
 }
 
 .loading-spinner {
