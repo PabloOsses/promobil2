@@ -34,7 +34,7 @@ export class LoginPage {
         this.router.navigate(['/home'], {queryParams: { user: username }});
       } else {
         console.log('Credenciales incorrectas');
-        // Muestra un mensaje de error o realiza alguna acción
+        // Muestra un mensaje de error
       }
     }
   }
