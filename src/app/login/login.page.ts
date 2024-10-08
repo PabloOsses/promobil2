@@ -10,6 +10,7 @@ import { SessionManager } from 'src/managers/SessionManager';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
+  invalidLogin = false;
   loginForm: FormGroup;
 
   constructor(private router: Router,private formBuilder: FormBuilder,private sessionManager: SessionManager) {
@@ -22,17 +23,20 @@ export class LoginPage {
   ngOnInit() {
   }
   // Método para iniciar sesión
+  
   onLogin() {
     if (this.loginForm.valid ) {
       const { username, password } = this.loginForm.value;
       
       // logica autentificacion (por ahora)
       if (this.sessionManager.performLogin(username, password)) {
+        this.invalidLogin = false;
         console.log('Inicio de sesión exitoso');
         // Redirigir al home
         //this.router.navigate(['/home']); 
         this.router.navigate(['/home'], {queryParams: { user: username }});
       } else {
+        this.invalidLogin = true;
         console.log('Credenciales incorrectas');
         // Muestra un mensaje de error
       }

@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'detail-place',
     loadChildren: () => import('./detail-place/detail-place.module').then( m => m.DetailPlacePageModule)
   },
+
+  {
+    path: 'city-map',
+    loadChildren: () => import('./city-map/city-map.module').then( m => m.CityMapPageModule)
+  },
 ];
 
 @NgModule({

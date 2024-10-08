@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mapa de</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Imagen de fondo del mapa -->
+  <div class="map-background">
+    <!-- Botón circular para navegar a otra página -->
+    <ion-fab style="top: 300px; right: 80px;">
+      <ion-fab-button (click)="navigateToOtherPage()" class="fab-button-with-border">
+        <!--<ion-icon name="navigate-outline"></ion-icon> -->
+        <img src="assets/notre_dame.jpg" alt="Icono personalizado" style="width: 100%; height: 100%; border-radius: 50%;">
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+ </ion-content>

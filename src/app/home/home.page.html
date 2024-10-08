@@ -7,17 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Imagen de fondo del mapa -->
-  <div class="map-background">
-    <!-- Botón circular para navegar a otra página -->
-    <ion-fab style="top: 300px; right: 80px;">
-      <ion-fab-button (click)="navigateToOtherPage()" class="fab-button-with-border">
-        <!--<ion-icon name="navigate-outline"></ion-icon> -->
-        <img src="assets/notre_dame.jpg" alt="Icono personalizado" style="width: 100%; height: 100%; border-radius: 50%;">
-      </ion-fab-button>
-    </ion-fab>
+<ion-content class="ion-padding cities-list">
+  <div *ngFor="let city of cities" class="city-button">
+    <ion-button fill="clear" expand="block" (click)="onCityClick(city.name)" class="city-bg" [style.background-image]="'url(' + city.image + ')'">
+      <span class="city-name">{{ city.name }}</span>
+    </ion-button>
   </div>
- </ion-content>
+</ion-content>
 
   

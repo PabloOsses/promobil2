@@ -9,6 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 export class HomePage {
 
   usuario: string = '';
+  cities = [
+    { name: 'París', image: 'assets/paris.png' },
+    /*
+    { name: 'Roma', image: 'assets/roma.jpg' },
+    { name: 'Londres', image: 'assets/londres.jpg' },
+    { name: 'Nueva York', image: 'assets/nueva-york.jpg' },
+    */
+  ];
   constructor(private router: Router,private route: ActivatedRoute) {}
   ngOnInit() {
     this.route.queryParams.subscribe( params=> {
@@ -16,7 +24,10 @@ export class HomePage {
     });
   }
 
-  navigateToOtherPage() {
-    this.router.navigate(['/detail-place']);
+
+  onCityClick(cityName: string) {
+    console.log('Ciudad seleccionada:', cityName);
+    this.router.navigate(['/city-map']);
   }
 }
+
