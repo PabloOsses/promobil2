@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding cities-list">
+<ion-content class="ion-padding cities-list background-image">
   <div *ngFor="let city of cities" class="city-button">
     <ion-button fill="clear" expand="block" (click)="onCityClick(city.name)" class="city-bg" [style.background-image]="'url(' + city.image + ')'">
       <span class="city-name">{{ city.name }}</span>

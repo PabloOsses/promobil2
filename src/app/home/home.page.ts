@@ -10,7 +10,7 @@ export class HomePage {
 
   usuario: string = '';
   cities = [
-    { name: 'París', image: 'assets/paris.png' },
+    { name: 'París', image: 'assets/ciudades/banner/paris.jpg' },
     /*
     { name: 'Roma', image: 'assets/roma.jpg' },
     { name: 'Londres', image: 'assets/londres.jpg' },
