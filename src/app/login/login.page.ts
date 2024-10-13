@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionManager } from 'src/managers/SessionManager';
 import { StorageService } from 'src/managers/StorageService';
+import { BackgroundMusicService } from 'src/app/services/background-music.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -15,7 +16,8 @@ export class LoginPage {
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private sessionManager: SessionManager,
-    private storageService: StorageService) {
+    private storageService: StorageService,
+    private backgroundMusicService: BackgroundMusicService) {
     // RECORDAR QUE ESTO ES FORMULARIO
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -50,6 +52,8 @@ resetForm() {
       //await this.storageService.set('userEmail', this.email)
       await this.storageService.set('user', username)
       await this.storageService.set('isSessionActive', true)
+      //this.backgroundMusicService.startBackgroundMusic();
+
       this.router.navigate(['/home'], { queryParams: { user: username } });
     } else {
       this.invalidLogin = true;
