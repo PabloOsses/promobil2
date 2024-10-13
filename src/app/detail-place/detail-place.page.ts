@@ -12,6 +12,11 @@ export class DetailPlacePage implements OnInit {
     { usuario: 'Lucho', texto: 'BAGUETTE BAGUETTE BAGUETTE BAGUETTE' },
     { usuario: 'Prueba', texto: 'COMENTARIO COMENTARIO COMENTARIO COMENTARIO' }
   ];
+  isFlipped: boolean = false;
+
+  toggleFlip() {
+    this.isFlipped = !this.isFlipped;
+  }
   constructor() { }
 
   ngOnInit() {

@@ -1,40 +1,77 @@
 .image-container {
-    position: relative;
-    text-align: center;
-    margin: 20px auto;
-    width: 100%;
-    max-width: 400px; /* Ajusta el ancho máximo de la imagen */
-  }
-  
-  .custom-image {
-    width: 100%;
-    border-radius: 10px;
-  }
-  
-  .image-name {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
-    color: white;
-    text-align: center;
-    font-size: 18px;
-  }
-  
-  .comments-section {
-    padding: 20px;
-  }
-  
-  .comments-section h2 {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  ion-item {
-    --background: #f9f9f9;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
+  position: relative;
+  text-align: center;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 400px; /* Ajusta el ancho máximo de la imagen */
+  cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+}
+
+.image-wrapper {
+  position: relative;
+  perspective: 1000px; /* Permite la perspectiva del 3D */
+}
+
+.custom-image {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.6s; /* Transición suave para la rotación */
+}
+
+.image-description {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo más oscuro para la descripción */
+  border-radius: 10px; /* Bordes redondeados para la descripción */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0; /* Oculto inicialmente */
+  transition: opacity 0.6s; /* Transición suave para la opacidad */
+  color: white; /* Color del texto blanco para mejor contraste */
+  padding: 10px; /* Añadir padding para que no esté tan pegado a los bordes */
+}
+
+.flipped .custom-image {
+  transform: rotateY(180deg); /* Voltear la imagen */
+}
+
+.flipped .image-description {
+  opacity: 1; /* Mostrar la descripción cuando está volteada */
+}
+
+.image-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+  color: white;
+  text-align: center;
+  font-size: 18px;
+}
+
+.comments-section {
+  padding: 20px;
+}
+
+.comments-section h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+ion-item {
+  --background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+
+
+
  

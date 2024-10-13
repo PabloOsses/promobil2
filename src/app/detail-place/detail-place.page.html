@@ -7,12 +7,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-  <!-- Contenedor de la imagen -->
-  <div class="image-container">
-    <!-- Imagen -->
-    <img src="assets/lugar_historico/notre_dame.jpg" alt="Nombre de la imagen" class="custom-image">
-    
+
+<ion-content>
+<div class="image-container" (click)="toggleFlip()">
+  <!-- Imagen -->
+  <div [ngClass]="{'flipped': isFlipped}" class="image-wrapper">
+    <img src="assets/lugar_historico/notre_dame.jpg" alt="Nombre de la imagen" class="custom-image" />
+    <div class="image-description">
+      <p>Notre Dame es una catedral famosa en París, conocida por su arquitectura gótica y su rica historia.</p>
+    </div>
+  </div>
     <!-- Nombre en el borde inferior de la imagen -->
     <div class="image-name">
       Notre Dame
