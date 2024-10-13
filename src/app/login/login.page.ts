@@ -28,7 +28,20 @@ export class LoginPage {
   ngOnInit() {
   }
   
-// Método para iniciar sesión
+/* eso se ejecuta cada ves que se entra a vista,
+es para recetear los valores del formulario del login,
+por suerte esto es algo de ionic
+*/
+ionViewWillEnter() {
+  this.resetForm();
+}
+
+resetForm() {
+  /*borra datos del formulario */
+  this.loginForm.reset(); 
+  /*por si acaso re-estableceremos esta variable */
+  this.invalidLogin = false; 
+}
   async onLogin() {
     if (this.loginForm.valid ) {
       const { username, password } = this.loginForm.value;
@@ -41,7 +54,7 @@ export class LoginPage {
     } else {
       this.invalidLogin = true;
       
-      alert('Las credenciales ingresadas son inválidas.');
+      //alert('Las credenciales ingresadas son inválidas.');
     }
   }
 }

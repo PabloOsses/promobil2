@@ -1,5 +1,5 @@
 .background-image {
-  --background: url(/assets/img3.png) no-repeat center center / cover;
+  --background: url(/assets/backblue.png) no-repeat center center / cover;
 }
 
 .login-form {
@@ -11,4 +11,29 @@
   text-align: center;
   margin-bottom: 30px; /*SEPARA EL FORMULARIO DEL LOGO */
 }
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
+  margin: 15px 0;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; /* Asegura que el mensaje abarque el 100% del ancho disponible */
+  display: inline-block; /* Asegura que el bloque rodee correctamente el texto */
+  animation: fadeIn 0.5s ease-in-out; /* Animación suave */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
 

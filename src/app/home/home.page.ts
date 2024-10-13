@@ -11,7 +11,7 @@ export class HomePage {
 
   usuario: string = '';
   cities = [
-    { name: 'París', image: 'assets/ciudades/banner/paris.jpg' },
+    { name: 'París', image: 'assets/ciudades/banner_ciudad/paris.jpg' },
     /*
     { name: 'Roma', image: 'assets/roma.jpg' },
     { name: 'Londres', image: 'assets/londres.jpg' },
@@ -26,11 +26,7 @@ export class HomePage {
   async loadData() {
     const user = await this.storageService.get('user')
     this.usuario = user
-    if (this.usuario===null){
-        //console.log("NULL NULLL NULL")
-        await this.storageService.clear()
-        this.router.navigate(['/splash'])
-    }
+    
   }
   
   async logout() {
