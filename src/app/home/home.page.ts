@@ -11,13 +11,12 @@ export class HomePage {
 
   usuario: string = '';
   cities = [
-    { name: 'París', image: 'assets/ciudades/banner_ciudad/paris.jpg' },
+    { name: 'París', image: 'assets/ciudades/banner_ciudad/paris2.jpg' },
     /*
     { name: 'Roma', image: 'assets/roma.jpg' },
-    { name: 'Londres', image: 'assets/londres.jpg' },
-    { name: 'Nueva York', image: 'assets/nueva-york.jpg' },
-    */
-  ];
+    { name: 'Troya', image: 'assets/londres.jpg' },*/
+    
+];
   constructor(private router: Router,private route: ActivatedRoute, private storageService: StorageService) {}
   async ngOnInit() { 
     this.loadData()

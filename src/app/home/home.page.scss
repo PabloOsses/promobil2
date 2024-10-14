@@ -1,28 +1,49 @@
+.cities-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.city-button {
+  width: 90%; /* Asegura que los botones ocupen un buen espacio */
+  margin-bottom: 15px; /* Espaciado entre botones */
+}
+
+.city-bg {
+  width: 100%;
+  height: 150px; /* Tamaño fijo para los botones */
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Color del texto */
+}
+
+.city-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Sombreado oscuro para mejorar la legibilidad del texto */
+  border-radius: 15px;
+}
+
+.city-name {
+  z-index: 1; /* El texto por encima del sombreado */
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .background-image {
-    --background: url(/assets/backblue.png) no-repeat center center / cover;
-  }
-  
-  .city-button {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 20px;
-  }
-  
-  .city-bg {
-    width: 100%;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  
-  .city-name {
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    font-size: 1.2rem;
-  }
+  --background: url(/assets/backblue.png) no-repeat center center / cover;
+}
 
 
+
+/* display: flex; justify-content: center; align-items: center;*/
