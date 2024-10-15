@@ -9,7 +9,7 @@ import { StorageService } from 'src/managers/StorageService';
 })
 export class HomePage {
 
-  usuario: string = '';
+  email: string = '';
   cities = [
     { name: 'París', image: 'assets/ciudades/banner_ciudad/paris2.jpg' },
     /*
@@ -23,8 +23,8 @@ export class HomePage {
   }
 
   async loadData() {
-    const user = await this.storageService.get('user')
-    this.usuario = user
+    const email = await this.storageService.get('email')
+    this.email = email
     
   }
   

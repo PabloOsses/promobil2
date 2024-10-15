@@ -20,7 +20,7 @@ export class LoginPage {
     private backgroundMusicService: BackgroundMusicService) {
     // RECORDAR QUE ESTO ES FORMULARIO
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
 
@@ -46,20 +46,20 @@ resetForm() {
 }
   async onLogin() {
     if (this.loginForm.valid ) {
-      const { username, password } = this.loginForm.value;
+      const { email, password } = this.loginForm.value;
     
-    if (this.sessionManager.performLogin(username,password)) {
-      //await this.storageService.set('userEmail', this.email)
-      await this.storageService.set('user', username)
-      await this.storageService.set('isSessionActive', true)
-      //this.backgroundMusicService.startBackgroundMusic();
+      if (this.sessionManager.loginWith(email,password)) {
+        //await this.storageService.set('userEmail', this.email)
+        await this.storageService.set('email', email)
+        await this.storageService.set('isSessionActive', true)
+        //this.backgroundMusicService.startBackgroundMusic();
 
-      this.router.navigate(['/home'], { queryParams: { user: username } });
-    } else {
-      this.invalidLogin = true;
-      
-      //alert('Las credenciales ingresadas son inválidas.');
-    }
+        this.router.navigate(['/home'], { queryParams: { email: email } });
+      } else {
+        this.invalidLogin = true;
+        
+        //alert('Las credenciales ingresadas son inválidas.');
+      }
   }
 }
   // Método para redirigir a la página de registro
