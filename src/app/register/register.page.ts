@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { SessionManager } from 'src/managers/SessionManager';
 import { CancelAlertService } from 'src/managers/CancelAlertService';
+import { ItemCrudService } from 'src/managers/item_crud_service';
+import { Usuario } from 'src/app/model/usuario.model';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -11,7 +13,11 @@ import { CancelAlertService } from 'src/managers/CancelAlertService';
 })
 export class RegisterPage implements OnInit {
   registerForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,private router: Router, private sessionManager: SessionManager, 
+  usuario_registrado: Usuario;
+  constructor(private formBuilder: FormBuilder,
+    private router: Router, 
+    private sessionManager: SessionManager,
+    private itemCrudService: ItemCrudService, 
     private alert: CancelAlertService) { 
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required]],
@@ -19,6 +25,7 @@ export class RegisterPage implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
     });
+
 
   }
 
@@ -39,7 +46,14 @@ export class RegisterPage implements OnInit {
 
   async onRegisterButtonPressed() {
     if (this.registerForm.valid ) {
-      const { email,password } = this.registerForm.value;
+      const { username,email,password } = this.registerForm.value;
+      
+      //----------
+      this.usuario_registrado = {
+        mail: email,
+        nombre: username
+      };
+      //---------
     try {
       const userCredential = await this.sessionManager.registerUserWith(
         email,
@@ -47,15 +61,23 @@ export class RegisterPage implements OnInit {
       );
 
       const user = userCredential.user;
-
+      
       if (user) {
+//--------------------------------
+        
+  await this.itemCrudService.createItem(this.usuario_registrado);
+  console.log('Usuario guardado en Firebase:', this.usuario_registrado.nombre);
+
+
+//----------------------------------
         this.alert.showAlert(
-          'Registro exitoso',                         
+          'Registro exitoso '+username,                         
           'Ya eres parte de nuestro sistema', 
           () => {    
             this.router.navigate(['/login']);     
           }
         )
+        
       } else {
         alert('¡Registro exitoso!');
       }
@@ -105,7 +127,12 @@ export class RegisterPage implements OnInit {
       }
     }
   }
+}
 
-  
 
-  }}
+
+
+
+}
+
+
