@@ -47,19 +47,28 @@ resetForm() {
   async onLogin() {
     if (this.loginForm.valid ) {
       const { email, password } = this.loginForm.value;
-    
-      if (this.sessionManager.loginWith(email,password)) {
-        //await this.storageService.set('userEmail', this.email)
-        await this.storageService.set('email', email)
-        await this.storageService.set('isSessionActive', true)
-        //this.backgroundMusicService.startBackgroundMusic();
+      try {
+        const isAuthenticated = await this.sessionManager.loginWith(email, password);
+        if (isAuthenticated) {
+          //await this.storageService.set('userEmail', this.email)
+          await this.storageService.set('email', email)
+          await this.storageService.set('isSessionActive', true)
 
-        this.router.navigate(['/home'], { queryParams: { email: email } });
-      } else {
-        this.invalidLogin = true;
-        
-        //alert('Las credenciales ingresadas son inválidas.');
+          //ESTA LINEA ES PARA LA MUSICA DE FONDO
+          //this.backgroundMusicService.startBackgroundMusic();
+
+          //this.router.navigate(['/home'], { queryParams: { email: email } });
+        } else {
+          this.invalidLogin = true;
+          console.log("NO VALIDO NO VALIDO")
+          //alert('Las credenciales ingresadas son inválidas.');
+        }
+      } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+        this.invalidLogin = true; // Mostrar mensaje de error en la interfaz si ocurre un error
       }
+    } else {
+    console.log("Formulario inválido");
   }
 }
   // Método para redirigir a la página de registro

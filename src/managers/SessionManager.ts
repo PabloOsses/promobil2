@@ -31,9 +31,18 @@ export class SessionManager {
         return await this.fireAuth.createUserWithEmailAndPassword(email, password)
     }
 
-    async loginWith(email: string, password: string) : Promise<any> {
-        return await this.fireAuth.signInWithEmailAndPassword(email, password)
+    async loginWith(email: string, password: string) : Promise<Boolean> {
+        console.log("AQUI AQUI");
+        try{
+            const userCredential = await this.fireAuth.signInWithEmailAndPassword(email, password);
+            console.log("cred cred cred: "+ userCredential);
+            return true;
+        }catch (error){
+            console.log("NO NO NO NO");
+            return false;
+        }
     }
+    
 
     async resetPassword(email: string) {
         return await this.fireAuth.sendPasswordResetEmail(email)
