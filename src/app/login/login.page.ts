@@ -57,7 +57,7 @@ resetForm() {
           //ESTA LINEA ES PARA LA MUSICA DE FONDO
           //this.backgroundMusicService.startBackgroundMusic();
 
-          //this.router.navigate(['/home'], { queryParams: { email: email } });
+          this.router.navigate(['/home'], { queryParams: { email: email } });
         } else {
           this.invalidLogin = true;
           console.log("NO VALIDO NO VALIDO")

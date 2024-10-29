@@ -1,14 +1,5 @@
-ion-content {
-    --background: transparent;
-  }
-  
-  .map-background {
-    background-image: url(/assets/ciudades/mapa_ciudad/mapa_paris.png); 
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-  }
-  .fab-button-with-border {
-    border: 5px solid blue; /* Aplica un borde azul al botón FAB */
-    border-radius: 50%;  /*PARA QUE SE MANTENGA COMO UN CIRCULO*/ 
-  }
+
+#mapId {
+  height: 100%;
+  width: 100%;
+}
