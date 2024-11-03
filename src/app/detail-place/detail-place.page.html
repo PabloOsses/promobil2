@@ -7,19 +7,18 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content>
-<div class="image-container" (click)="toggleFlip()">
-  <!-- Imagen -->
-  <div [ngClass]="{'flipped': isFlipped}" class="image-wrapper">
-    <img src="assets/lugar_historico/notre_dame.jpg" alt="Nombre de la imagen" class="custom-image" />
-    <div class="image-description">
-      <p>Notre Dame es una catedral famosa en París, conocida por su arquitectura gótica y su rica historia.</p>
+<ion-content class="background-image">
+  <div class="image-container" (click)="toggleFlip()">
+    <!-- Imagen -->
+    <div [ngClass]="{'flipped': isFlipped}" class="image-wrapper">
+      <img [src]="imageUrl" alt="Nombre de la imagen" class="custom-image" />
+      <div class="image-description">
+        <p>{{ description }}</p>
+      </div>
     </div>
-  </div>
     <!-- Nombre en el borde inferior de la imagen -->
     <div class="image-name">
-      Notre Dame
+      {{ attractionName }}
     </div>
   </div>
 
@@ -27,9 +26,9 @@
   <div class="comments-section">
     <h2>Comentarios</h2>
     <ion-list>
-      <ion-item *ngFor="let comentario of comentarios">
+      <ion-item *ngFor="let comentario of currentComentarios">
         <ion-label>
-          <p>{{ comentario.usuario}}:</p>
+          <p>{{ comentario.usuario }}:</p>
           <p>{{ comentario.texto }}</p>
         </ion-label>
       </ion-item>
