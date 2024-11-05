@@ -21,7 +21,6 @@
       {{ attractionName }}
     </div>
   </div>
-
   <!-- Comentarios de los usuarios -->
   <div class="comments-section">
     <h2>Comentarios</h2>
@@ -29,24 +28,8 @@
       <ion-item *ngFor="let comentario of currentComentarios">
         <ion-label>
           <p>{{ comentario.usuario }}:</p>
-          <p *ngIf="!comentario.isEditing">{{ comentario.texto }}</p>
-          <ion-input 
-            *ngIf="comentario.isEditing" 
-            [(ngModel)]="comentario.texto" 
-            placeholder="Edita tu comentario"
-          ></ion-input>
+          <p>{{ comentario.texto }}</p>
         </ion-label>
-        <ion-buttons slot="end">
-          <ion-button color="danger" (click)="deleteComment(comentario.key)">
-            <ion-icon name="trash"></ion-icon>
-          </ion-button>
-          <ion-button color="secondary" *ngIf="!comentario.isEditing" (click)="editComment(comentario)">
-            <ion-icon name="create"></ion-icon>
-          </ion-button>
-          <ion-button color="success" *ngIf="comentario.isEditing" (click)="submitEdit(comentario)">
-            <ion-icon name="checkmark"></ion-icon>
-          </ion-button>
-        </ion-buttons>
       </ion-item>
     </ion-list>
 
@@ -64,14 +47,3 @@
     </div>
   </div>
 </ion-content>
-
-<style>
-  .comments-section {
-    padding: 10px;
-  }
-  .add-comment-input {
-    margin-top: 10px;
-  }
-</style>
-
-
