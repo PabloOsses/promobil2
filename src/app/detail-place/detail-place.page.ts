@@ -81,10 +81,13 @@ export class DetailPlacePage implements OnInit {
   // Cargar comentarios desde Firebase
   loadComments() {
     this.commentsService.getComments(this.attractionName).subscribe(comments => {
-        // Mapea los comentarios y añade el $key como key
-        this.currentComentarios = comments.map(comment => ({ ...comment, key: comment['$key'] }));
+        this.currentComentarios = comments.map(comment => {
+            // Extrae la clave del comentario usando `$key` o el identificador correcto
+            const key = comment['$key'] || comment.key;
+            return { ...comment, key };
+        });
     });
-}
+  }
 
   toggleFlip() {
     this.isFlipped = !this.isFlipped;
@@ -126,6 +129,7 @@ export class DetailPlacePage implements OnInit {
 
   // Método para eliminar un comentario
   deleteComment(commentKey: string) {
+    console.log("key es: "+commentKey);
     this.commentsService.deleteComment(this.attractionName, commentKey)
       .then(() => {
         console.log('Comentario eliminado con éxito');
