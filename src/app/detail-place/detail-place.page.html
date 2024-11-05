@@ -52,7 +52,7 @@
         </ion-buttons>
     </ion-item>
     </ion-list>
-
+    
     <!-- Campo de entrada y botón para agregar un comentario -->
     <div class="add-comment-input" *ngIf="isAddingComment">
       <ion-input [(ngModel)]="newCommentText" placeholder="Escribe tu comentario aquí"></ion-input>
@@ -70,6 +70,8 @@
   </div>
 </ion-content>
 
+
+
 <style>
   .comments-section {
     padding: 10px;
@@ -78,5 +80,3 @@
     margin-top: 10px;
   }
 </style>
-
-

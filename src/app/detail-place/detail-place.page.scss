@@ -119,3 +119,45 @@ ion-button {
 ion-input {
   --color: #000; /* Color del texto negro */
 }
+/* Elimina el fondo negro de la sección completa */
+.comments-section {
+  padding: 20px;
+  background-color: transparent; /* Fondo transparente para evitar fondo negro */
+}
+
+/* Estilo del título de la sección de comentarios */
+.comments-section h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: white; /* Cambia el color si es necesario */
+}
+
+/* Estilo para cada comentario individual */
+.comment-item {
+  background-color: #fff; /* Fondo blanco para cada comentario */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px; /* Espacio interno dentro del comentario */
+  margin: 10px 0; /* Espacio entre los comentarios y los bordes */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para separar los comentarios */
+}
+
+/* Estilo del texto dentro del comentario */
+.comment-text {
+  color: #000; /* Texto en color negro */
+  flex-grow: 1;
+  margin-right: 10px; /* Espacio entre texto e iconos */
+}
+
+/* Estilo de los iconos de editar y eliminar */
+.comment-icons {
+  display: flex;
+  gap: 10px; /* Espacio entre los iconos */
+}
+
+ion-icon {
+  --color: #FF7F50; /* Color de los iconos */
+  cursor: pointer;
+}
