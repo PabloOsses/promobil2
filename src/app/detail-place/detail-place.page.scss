@@ -1,6 +1,7 @@
 .background-image {
   --background: url(/assets/backblue.png) no-repeat center center / cover;
 }
+
 .image-container {
   position: relative;
   text-align: center;
@@ -40,11 +41,11 @@
 }
 
 .flipped .custom-image {
-  transform: rotateY(180deg); /* Voltear la imagen */
+  transform: rotateY(180deg); 
 }
 
 .flipped .image-description {
-  opacity: 1; /* Mostrar la descripción cuando está volteada */
+  opacity: 1; 
 }
 
 .image-name {
@@ -53,7 +54,7 @@
   left: 0;
   right: 0;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   text-align: center;
   font-size: 18px;
@@ -68,11 +69,15 @@
   margin-bottom: 10px;
 }
 
+
 ion-item {
-  --background: #f9f9f9;
-  border-radius: 8px;
+  --border-color: transparent; /* Elimina el color del borde */
+  border: none; /* Asegúrate de que no haya borde */
+  --background: #f9f9f9; /* Fondo personalizado */
+  border-radius: 8px; /* Asegúrate de que haya un borde redondeado */
   margin-bottom: 10px;
 }
+
 .add-comment-button {
   display: flex;
   justify-content: center;
@@ -80,30 +85,37 @@ ion-item {
 }
 
 ion-button {
-  --color: #FF7F50; /* Cambia el color según el tema de la app */
+  --color: #FF7F50;
   font-size: 24px;
 }
+
 .add-comment-input {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  margin-top: 10px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px; /* Espacio entre el input y el botón */
+  margin-top: 10px; /* Movido aquí para evitar duplicación */
 }
 
 .add-comment-input ion-input {
   --padding-start: 10px;
   --padding-end: 10px;
   --background: #fff;
-  --color: #000; /* Texto en negro */
+  --color: #000; 
   border-radius: 5px;
 }
 
-.add-comment-input ion-button {
-  --color: #FF7F50; /* Color naranja fuerte */
+.circular-button {
+  --border-radius: 50%; 
+  width: 50px; 
+  height: 50px; 
+  --padding: 0; 
+  --background: #FF7F50; 
+  color: white; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
 }
-
-
-
-
- 
+ion-input {
+  --color: #000; /* Color del texto negro */
+}

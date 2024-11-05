@@ -27,6 +27,7 @@ export class CommentsService {
     const comment = { usuario, texto };
     return this.db.list(`comments/${attractionName}`).push(comment).then(ref => ref.key);
   }
+  
 
   // Método para actualizar un comentario existente
   updateComment(attractionName: string, commentId: string, updatedText: string) {

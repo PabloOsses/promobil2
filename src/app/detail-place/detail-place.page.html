@@ -28,32 +28,37 @@
     <ion-list>
       <ion-item *ngFor="let comentario of currentComentarios">
         <ion-label>
-          <p>{{ comentario.usuario }}:</p>
-          <p *ngIf="!comentario.isEditing">{{ comentario.texto }}</p>
-          <ion-input 
-            *ngIf="comentario.isEditing" 
-            [(ngModel)]="comentario.texto" 
-            placeholder="Edita tu comentario"
-          ></ion-input>
+            <p>{{ comentario.usuario }}:</p>
+            <p *ngIf="!comentario.isEditing">{{ comentario.texto }}</p>
+            <ion-input 
+                *ngIf="comentario.isEditing" 
+                [(ngModel)]="comentario.texto" 
+                placeholder="Edita tu comentario"
+            ></ion-input>
         </ion-label>
         <ion-buttons slot="end">
-          <ion-button color="danger" (click)="deleteComment(comentario.key)">
-            <ion-icon name="trash"></ion-icon>
-          </ion-button>
-          <ion-button color="secondary" *ngIf="!comentario.isEditing" (click)="editComment(comentario)">
-            <ion-icon name="create"></ion-icon>
-          </ion-button>
-          <ion-button color="success" *ngIf="comentario.isEditing" (click)="submitEdit(comentario)">
-            <ion-icon name="checkmark"></ion-icon>
-          </ion-button>
+            <!-- Botón de eliminar solo para el propietario del comentario -->
+            <ion-button color="danger" *ngIf="comentario.usuario === userName" (click)="deleteComment(comentario.key, comentario)">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+            <!-- Botón de editar solo para el propietario del comentario -->
+            <ion-button color="secondary" *ngIf="!comentario.isEditing && comentario.usuario === userName" (click)="editComment(comentario)">
+                <ion-icon name="create"></ion-icon>
+            </ion-button>
+            <!-- Botón para confirmar edición solo si está en modo de edición -->
+            <ion-button color="success" *ngIf="comentario.isEditing" (click)="submitEdit(comentario)">
+                <ion-icon name="checkmark"></ion-icon>
+            </ion-button>
         </ion-buttons>
-      </ion-item>
+    </ion-item>
     </ion-list>
 
     <!-- Campo de entrada y botón para agregar un comentario -->
     <div class="add-comment-input" *ngIf="isAddingComment">
       <ion-input [(ngModel)]="newCommentText" placeholder="Escribe tu comentario aquí"></ion-input>
-      <ion-button expand="block" color="warning" (click)="submitComment()">Enviar</ion-button>
+      <ion-button class="circular-button" (click)="submitComment()">
+        <ion-icon slot="icon-only" name="paper-plane"></ion-icon> <!-- Ícono de avión de papel -->
+      </ion-button>
     </div>
 
     <!-- Botón para mostrar el campo de entrada de comentario -->

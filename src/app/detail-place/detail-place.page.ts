@@ -127,15 +127,17 @@ export class DetailPlacePage implements OnInit {
     }
   }
 
-  // Método para eliminar un comentario
-  deleteComment(commentKey: string) {
-    console.log("key es: "+commentKey);
-    this.commentsService.deleteComment(this.attractionName, commentKey)
-      .then(() => {
-        console.log('Comentario eliminado con éxito');
-      })
-      .catch(error => {
-        console.error('Error al eliminar el comentario:', error);
-      });
-  }
+  deleteComment(commentKey: string, comentario: any) {
+        if (comentario.usuario === this.userName) { // Verifica si el usuario actual es el propietario del comentario
+            this.commentsService.deleteComment(this.attractionName, commentKey)
+                .then(() => {
+                    console.log('Comentario eliminado con éxito');
+                })
+                .catch(error => {
+                    console.error('Error al eliminar el comentario:', error);
+                });
+        } else {
+            console.warn('No tienes permiso para eliminar este comentario');
+        }
+    }
 }
