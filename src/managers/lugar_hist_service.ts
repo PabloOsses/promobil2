@@ -9,11 +9,8 @@ import { map } from 'rxjs/operators';
 export class CommentsService {
   constructor(private db: AngularFireDatabase) {}
 
-  // Método para obtener comentarios de una atracción específica
-  /*
-  getComments(attractionName: string): Observable<any[]> {
-    return this.db.list(`comments/${attractionName}`).valueChanges();
-  }*/
+  // obtener comentarios de una atracción específica
+  
     getComments(attractionName: string): Observable<any[]> {
       return this.db.list(`comments/${attractionName}`).snapshotChanges().pipe(
         map(changes =>
@@ -22,19 +19,19 @@ export class CommentsService {
       );
     }
 
-  // Método para agregar un nuevo comentario
+  // agregar un nuevo comentario
   addComment(attractionName: string, usuario: string, texto: string) {
     const comment = { usuario, texto };
     return this.db.list(`comments/${attractionName}`).push(comment).then(ref => ref.key);
   }
   
 
-  // Método para actualizar un comentario existente
+  // actualizar un comentario 
   updateComment(attractionName: string, commentId: string, updatedText: string) {
     return this.db.list(`comments/${attractionName}`).update(commentId, { texto: updatedText });
 }
 
-  // Método para eliminar un comentario
+  // eliminar un comentario
   deleteComment(attractionName: string, commentId: string) {
     if (!commentId) {
       console.error('No se puede eliminar el comentario: ID inválido.');
