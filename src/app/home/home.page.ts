@@ -13,6 +13,8 @@ export class HomePage {
 
   email: string = '';
   userName: string = '';
+  /*Por ahora solo tendremos paris, mas ciudades se añadiran en el futuro
+  y probablemente se deberan leer desde firebase*/
   cities = [
     { name: 'París', image: 'assets/ciudades/banner_ciudad/paris2.jpg' },
     /*

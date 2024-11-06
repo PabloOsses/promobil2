@@ -71,10 +71,10 @@
 
 
 ion-item {
-  --border-color: transparent; /* Elimina el color del borde */
-  border: none; /* Asegúrate de que no haya borde */
-  --background: #f9f9f9; /* Fondo personalizado */
-  border-radius: 8px; /* Asegúrate de que haya un borde redondeado */
+  --border-color: transparent; 
+  border: none; 
+  --background: #f9f9f9; 
+  border-radius: 8px; 
   margin-bottom: 10px;
 }
 
@@ -93,8 +93,8 @@ ion-button {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px; /* Espacio entre el input y el botón */
-  margin-top: 10px; /* Movido aquí para evitar duplicación */
+  gap: 10px; 
+  margin-top: 10px; 
 }
 
 .add-comment-input ion-input {
@@ -117,47 +117,47 @@ ion-button {
   justify-content: center; 
 }
 ion-input {
-  --color: #000; /* Color del texto negro */
-}
-/* Elimina el fondo negro de la sección completa */
-.comments-section {
-  padding: 20px;
-  background-color: transparent; /* Fondo transparente para evitar fondo negro */
+  --color: #000; 
 }
 
-/* Estilo del título de la sección de comentarios */
+.comments-section {
+  padding: 20px;
+  background-color: transparent; 
+}
+
+
 .comments-section h2 {
   text-align: center;
   margin-bottom: 10px;
-  color: white; /* Cambia el color si es necesario */
+  color: white; 
 }
 
-/* Estilo para cada comentario individual */
+
 .comment-item {
-  background-color: #fff; /* Fondo blanco para cada comentario */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 10px; /* Espacio interno dentro del comentario */
-  margin: 10px 0; /* Espacio entre los comentarios y los bordes */
+  background-color: #fff; 
+  border-radius: 8px; 
+  padding: 10px; 
+  margin: 10px 0; 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para separar los comentarios */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
-/* Estilo del texto dentro del comentario */
+
 .comment-text {
-  color: #000; /* Texto en color negro */
+  color: #000; 
   flex-grow: 1;
-  margin-right: 10px; /* Espacio entre texto e iconos */
+  margin-right: 10px; 
 }
 
-/* Estilo de los iconos de editar y eliminar */
+
 .comment-icons {
   display: flex;
-  gap: 10px; /* Espacio entre los iconos */
+  gap: 10px; 
 }
 
 ion-icon {
-  --color: #FF7F50; /* Color de los iconos */
+  --color: #FF7F50;
   cursor: pointer;
 }

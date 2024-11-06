@@ -30,11 +30,11 @@ export class DetailPlacePage implements OnInit {
   email: string = '';
   userName: string = '';
   isFlipped: boolean = false;
-  attractionName: string; // Nombre de la atracción seleccionada
-  imageUrl: string; // URL de la imagen de la atracción
-  description: string; // Descripción de la atracción
-  currentComentarios: any[] = []; // Comentarios de la atracción actual
-  isAddingComment: boolean = false; // Controla la visibilidad del campo de entrada
+  attractionName: string; // nombre de la atraccion seleccionada
+  imageUrl: string; // URL de la imagen de la atraccion
+  description: string; // descripcion de la atraccion
+  currentComentarios: any[] = []; // comentarios de la atraccion actual
+  isAddingComment: boolean = false; //visibilidad del campo de entrada
   newCommentText: string = ''; // Almacena el texto del nuevo comentario
 
   constructor(
@@ -50,7 +50,7 @@ export class DetailPlacePage implements OnInit {
       this.attractionName = params['attraction'];
       this.setAttractionDetails(this.attractionName);
       this.loadData();
-      this.loadComments(); // Cargar comentarios de Firebase
+      this.loadComments(); 
     });
   }
 
@@ -78,17 +78,17 @@ export class DetailPlacePage implements OnInit {
     }
   }
 
-  // Cargar comentarios desde Firebase
+  // cargar comentarios desde Firebase (se llama al crud)
   loadComments() {
     this.commentsService.getComments(this.attractionName).subscribe(comments => {
         this.currentComentarios = comments.map(comment => {
-            // Extrae la clave del comentario usando `$key` o el identificador correcto
+            
             const key = comment['$key'] || comment.key;
             return { ...comment, key };
         });
     });
   }
-
+//movimiento de la imagen de la atraccion
   toggleFlip() {
     this.isFlipped = !this.isFlipped;
   }
@@ -97,25 +97,26 @@ export class DetailPlacePage implements OnInit {
     this.isAddingComment = true;
   }
 
+  // subir un comentario nuevo
   submitComment() {
     if (this.newCommentText.trim()) {
-      const usuario = this.userName; // Obtener el usuario autenticado
+      const usuario = this.userName; // obtiene el usuario autenticado
       this.commentsService.addComment(this.attractionName, usuario, this.newCommentText).then(key => {
-        this.newCommentText = ''; // Limpiar el campo de entrada
+        this.newCommentText = ''; 
         this.isAddingComment = false; // Ocultar el campo de entrada después de enviar el comentario
       });
     }
   }
 
-  // Método para iniciar la edición de un comentario
+  // metodo para iniciar la edición de un comentario
   editComment(comentario: any) {
-    comentario.isEditing = true; // Activa el modo de edición
+    comentario.isEditing = true; 
   }
   
 
   submitEdit(comentario: any) {
     if (comentario.texto.trim()) {
-        // Pasa la atracción, el ID del comentario, y el texto actualizado
+        // pasa la atracción, el ID del comentario, y el texto actualizado
         this.commentsService.updateComment(this.attractionName, comentario.key, comentario.texto)
             .then(() => {
                 // Opcional: puedes agregar lógica aquí si necesitas algo después de la edición
@@ -128,7 +129,8 @@ export class DetailPlacePage implements OnInit {
   }
 
   deleteComment(commentKey: string, comentario: any) {
-        if (comentario.usuario === this.userName) { // Verifica si el usuario actual es el propietario del comentario
+        if (comentario.usuario === this.userName) { 
+          // se verifica si el usuario actual es el propietario del comentario
             this.commentsService.deleteComment(this.attractionName, commentKey)
                 .then(() => {
                     console.log('Comentario eliminado con éxito');

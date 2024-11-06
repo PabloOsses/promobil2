@@ -49,6 +49,7 @@ export class RegisterPage implements OnInit {
       const { username,email,password } = this.registerForm.value;
       
       //----------
+      /* modificacion para guardar el NOMBRE del usuario */
       this.usuario_registrado = {
         mail: email,
         nombre: username
@@ -64,6 +65,7 @@ export class RegisterPage implements OnInit {
       
       if (user) {
 //--------------------------------
+/* modificacion para guardar el NOMBRE del usuario en firebase */
         
   await this.itemCrudService.createItem(this.usuario_registrado);
   console.log('Usuario guardado en Firebase:', this.usuario_registrado.nombre);

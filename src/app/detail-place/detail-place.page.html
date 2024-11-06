@@ -9,20 +9,20 @@
 
 <ion-content class="background-image">
   <div class="image-container" (click)="toggleFlip()">
-    <!-- Imagen -->
+    <!--Imagen  de lugar historico-->
     <div [ngClass]="{'flipped': isFlipped}" class="image-wrapper">
       <img [src]="imageUrl" alt="Nombre de la imagen" class="custom-image" />
       <div class="image-description">
         <p>{{ description }}</p>
       </div>
     </div>
-    <!-- Nombre en el borde inferior de la imagen -->
+    <!--Nombre del lugar historico en el borde inferior de la imagen-->
     <div class="image-name">
       {{ attractionName }}
     </div>
   </div>
 
-  <!-- Comentarios de los usuarios -->
+  <!--Comentarios de los usuarios -->
   <div class="comments-section">
     <h2>Comentarios</h2>
     <ion-list>
@@ -30,6 +30,8 @@
         <ion-label>
             <p>{{ comentario.usuario }}:</p>
             <p *ngIf="!comentario.isEditing">{{ comentario.texto }}</p>
+            <!--Ya no veo el placeholder, pero eso esta bien -->
+            <!--no quiero quebrar nada asi que lo dejaremos asi-->
             <ion-input 
                 *ngIf="comentario.isEditing" 
                 [(ngModel)]="comentario.texto" 
@@ -37,15 +39,15 @@
             ></ion-input>
         </ion-label>
         <ion-buttons slot="end">
-            <!-- Botón de eliminar solo para el propietario del comentario -->
+            <!--boton de eliminar solo para el USUARIO ACTUAL -->
             <ion-button color="danger" *ngIf="comentario.usuario === userName" (click)="deleteComment(comentario.key, comentario)">
                 <ion-icon name="trash"></ion-icon>
             </ion-button>
-            <!-- Botón de editar solo para el propietario del comentario -->
+            <!--boton de editar solo para el USUARIO ACTUAL -->
             <ion-button color="secondary" *ngIf="!comentario.isEditing && comentario.usuario === userName" (click)="editComment(comentario)">
                 <ion-icon name="create"></ion-icon>
             </ion-button>
-            <!-- Botón para confirmar edición solo si está en modo de edición -->
+            <!--boton para confirmar edicion -->
             <ion-button color="success" *ngIf="comentario.isEditing" (click)="submitEdit(comentario)">
                 <ion-icon name="checkmark"></ion-icon>
             </ion-button>
@@ -53,7 +55,7 @@
     </ion-item>
     </ion-list>
     
-    <!-- Campo de entrada y botón para agregar un comentario -->
+    <!--campo de entrada y boton para agregar un comentario -->
     <div class="add-comment-input" *ngIf="isAddingComment">
       <ion-input [(ngModel)]="newCommentText" placeholder="Escribe tu comentario aquí"></ion-input>
       <ion-button class="circular-button" (click)="submitComment()">
@@ -61,7 +63,7 @@
       </ion-button>
     </div>
 
-    <!-- Botón para mostrar el campo de entrada de comentario -->
+    <!--boton para mostrar el campo de entrada de comentario -->
     <div class="add-comment-button" *ngIf="!isAddingComment">
       <ion-button fill="clear" (click)="showCommentInput()">
         <ion-icon name="add-circle-outline"></ion-icon>

@@ -75,7 +75,7 @@ export class CityMapPage implements OnInit {
   }
 
   // COdigo para borrar el mapa al salir de la vista
-  //comentado porque di vulevo a la vista desde la de detalle, el mapa no carga
+  //comentado porque es redundante, por ahora
   /*
   ionViewDidLeave() {
     if (this.map) {
