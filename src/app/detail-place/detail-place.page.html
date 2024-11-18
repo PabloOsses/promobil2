@@ -21,6 +21,19 @@
       {{ attractionName }}
     </div>
   </div>
+  <div class="geolocation-info" *ngIf="isFlipped">
+    <p><strong>Tu ubicación:</strong></p>
+    <p>Latitud: {{ userLatitude }}</p>
+    <p>Longitud: {{ userLongitude }}</p>
+  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Tiempo estimado de viaje en carreta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Tiempo estimado para llegar a {{ attractionName }}: {{ estimatedDays }} días.</p>
+    </ion-card-content>
+  </ion-card>
 
   <!--Comentarios de los usuarios -->
   <div class="comments-section">
