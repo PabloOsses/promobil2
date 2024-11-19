@@ -20,10 +20,14 @@ export class CommentsService {
     }
 
   // agregar un nuevo comentario
+  /*
   addComment(attractionName: string, usuario: string, texto: string) {
     const comment = { usuario, texto };
     return this.db.list(`comments/${attractionName}`).push(comment).then(ref => ref.key);
-  }
+  }*/
+    addComment(attractionName: string, comment: { usuario: string; texto: string; imagen?: string }) {
+      return this.db.list(`comments/${attractionName}`).push(comment).then(ref => ref.key);
+    }
   
 
   // actualizar un comentario 
@@ -39,5 +43,6 @@ export class CommentsService {
     }
     return this.db.list(`comments/${attractionName}`).remove(commentId);
   }
+  
 }
 

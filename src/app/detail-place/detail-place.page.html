@@ -9,14 +9,14 @@
 
 <ion-content class="background-image">
   <div class="image-container" (click)="toggleFlip()">
-    <!--Imagen  de lugar historico-->
+    <!-- Imagen de lugar histórico -->
     <div [ngClass]="{'flipped': isFlipped}" class="image-wrapper">
       <img [src]="imageUrl" alt="Nombre de la imagen" class="custom-image" />
       <div class="image-description">
         <p>{{ description }}</p>
       </div>
     </div>
-    <!--Nombre del lugar historico en el borde inferior de la imagen-->
+    <!-- Nombre del lugar histórico en el borde inferior de la imagen -->
     <div class="image-name">
       {{ attractionName }}
     </div>
@@ -26,7 +26,7 @@
     <p>Latitud: {{ userLatitude }}</p>
     <p>Longitud: {{ userLongitude }}</p>
   </div>
-  <ion-card>
+  <ion-card *ngIf="isFlipped">
     <ion-card-header>
       <ion-card-title>Tiempo estimado de viaje en carreta</ion-card-title>
     </ion-card-header>
@@ -35,48 +35,48 @@
     </ion-card-content>
   </ion-card>
 
-  <!--Comentarios de los usuarios -->
+  <!-- Sección de comentarios de los usuarios -->
   <div class="comments-section">
     <h2>Comentarios</h2>
     <ion-list>
       <ion-item *ngFor="let comentario of currentComentarios">
         <ion-label>
-            <p>{{ comentario.usuario }}:</p>
-            <p *ngIf="!comentario.isEditing">{{ comentario.texto }}</p>
-            <!--Ya no veo el placeholder, pero eso esta bien -->
-            <!--no quiero quebrar nada asi que lo dejaremos asi-->
-            <ion-input 
-                *ngIf="comentario.isEditing" 
-                [(ngModel)]="comentario.texto" 
-                placeholder="Edita tu comentario"
-            ></ion-input>
+          <p>{{ comentario.usuario }}:</p>
+          <p *ngIf="!comentario.isEditing">{{ comentario.texto }}</p>
+          <ion-input 
+            *ngIf="comentario.isEditing" 
+            [(ngModel)]="comentario.texto" 
+            placeholder="Edita tu comentario"
+          ></ion-input>
         </ion-label>
+        <img *ngIf="comentario.imagen" [src]="comentario.imagen" alt="Imagen adjunta" class="comment-image" />
         <ion-buttons slot="end">
-            <!--boton de eliminar solo para el USUARIO ACTUAL -->
-            <ion-button color="danger" *ngIf="comentario.usuario === userName" (click)="deleteComment(comentario.key, comentario)">
-                <ion-icon name="trash"></ion-icon>
-            </ion-button>
-            <!--boton de editar solo para el USUARIO ACTUAL -->
-            <ion-button color="secondary" *ngIf="!comentario.isEditing && comentario.usuario === userName" (click)="editComment(comentario)">
-                <ion-icon name="create"></ion-icon>
-            </ion-button>
-            <!--boton para confirmar edicion -->
-            <ion-button color="success" *ngIf="comentario.isEditing" (click)="submitEdit(comentario)">
-                <ion-icon name="checkmark"></ion-icon>
-            </ion-button>
+          <ion-button color="danger" *ngIf="comentario.usuario === userName" (click)="deleteComment(comentario.key, comentario)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          <ion-button color="secondary" *ngIf="!comentario.isEditing && comentario.usuario === userName" (click)="editComment(comentario)">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button color="success" *ngIf="comentario.isEditing" (click)="submitEdit(comentario)">
+            <ion-icon name="checkmark"></ion-icon>
+          </ion-button>
         </ion-buttons>
-    </ion-item>
+      </ion-item>
     </ion-list>
     
-    <!--campo de entrada y boton para agregar un comentario -->
+    <!-- Campo de entrada y botón para agregar un comentario -->
     <div class="add-comment-input" *ngIf="isAddingComment">
       <ion-input [(ngModel)]="newCommentText" placeholder="Escribe tu comentario aquí"></ion-input>
+      <ion-button (click)="addImage()">
+        <ion-icon name="camera"></ion-icon> Adjuntar Foto
+      </ion-button>
       <ion-button class="circular-button" (click)="submitComment()">
-        <ion-icon slot="icon-only" name="paper-plane"></ion-icon> <!-- Ícono de avión de papel -->
+        <ion-icon slot="icon-only" name="paper-plane"></ion-icon>
       </ion-button>
     </div>
+    <img *ngIf="attachedImage" [src]="attachedImage" alt="Vista previa de la imagen" class="preview-image" />
 
-    <!--boton para mostrar el campo de entrada de comentario -->
+    <!-- Botón para mostrar el campo de entrada de comentario -->
     <div class="add-comment-button" *ngIf="!isAddingComment">
       <ion-button fill="clear" (click)="showCommentInput()">
         <ion-icon name="add-circle-outline"></ion-icon>
@@ -85,13 +85,25 @@
   </div>
 </ion-content>
 
-
-
 <style>
   .comments-section {
     padding: 10px;
   }
+
   .add-comment-input {
     margin-top: 10px;
+  }
+
+  .comment-image {
+    max-width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+
+  .preview-image {
+    max-width: 100%;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
   }
 </style>
