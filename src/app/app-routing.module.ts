@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'city-map',
     loadChildren: () => import('./city-map/city-map.module').then( m => m.CityMapPageModule)
   },
+  {
+    path: 'dplay-imagen',
+    loadChildren: () => import('./dplay-imagen/dplay-imagen.module').then( m => m.DplayImagenPageModule)
+  },
 ];
 
 @NgModule({

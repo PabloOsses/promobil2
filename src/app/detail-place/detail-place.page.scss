@@ -7,19 +7,19 @@
   text-align: center;
   margin: 20px auto;
   width: 100%;
-  max-width: 400px; 
-  cursor: pointer; 
+  max-width: 400px;
+  cursor: pointer;
 }
 
 .image-wrapper {
   position: relative;
-  perspective: 1000px; 
+  perspective: 1000px;
 }
 
 .custom-image {
   width: 100%;
   border-radius: 10px;
-  transition: transform 0.6s; 
+  transition: transform 0.6s;
 }
 
 .image-description {
@@ -28,24 +28,24 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8); 
-  border-radius: 10px; 
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  opacity: 0; 
-  transition: opacity 0.6s; 
-  color: white; 
-  padding: 10px; 
+  opacity: 0;
+  transition: opacity 0.6s;
+  color: white;
+  padding: 10px;
 }
 
 .flipped .custom-image {
-  transform: rotateY(180deg); 
+  transform: rotateY(180deg);
 }
 
 .flipped .image-description {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .image-name {
@@ -60,21 +60,47 @@
   font-size: 18px;
 }
 
+.geolocation-info {
+  text-align: center;
+  margin: 20px 0;
+  color: white;
+}
+
+.geolocation-info p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+ion-card {
+  margin: 20px 0;
+}
+
+ion-card-header {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+ion-card-content {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
 .comments-section {
   padding: 20px;
+  background-color: transparent;
 }
 
 .comments-section h2 {
   text-align: center;
   margin-bottom: 10px;
+  color: white;
 }
 
-
 ion-item {
-  --border-color: transparent; 
-  border: none; 
-  --background: #f9f9f9; 
-  border-radius: 8px; 
+  --border-color: transparent;
+  border: none;
+  --background: #f9f9f9;
+  border-radius: 8px;
   margin-bottom: 10px;
 }
 
@@ -91,76 +117,68 @@ ion-button {
 
 .add-comment-input {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 10px; 
-  margin-top: 10px; 
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .add-comment-input ion-input {
   --padding-start: 10px;
   --padding-end: 10px;
   --background: #fff;
-  --color: #000; 
+  --color: #000;
   border-radius: 5px;
+  width: 100%;
+}
+
+.camera-button-container {
+  margin-top: 8px;
 }
 
 .circular-button {
-  --border-radius: 50%; 
-  width: 50px; 
-  height: 50px; 
-  --padding: 0; 
-  --background: #FF7F50; 
-  color: white; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  --border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  --padding: 0;
+  --background: #FF7F50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 ion-input {
-  --color: #000; 
+  --color: #000;
 }
-
-.comments-section {
-  padding: 20px;
-  background-color: transparent; 
-}
-
-
-.comments-section h2 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: white; 
-}
-
 
 .comment-item {
-  background-color: #fff; 
-  border-radius: 8px; 
-  padding: 10px; 
-  margin: 10px 0; 
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 
 .comment-text {
-  color: #000; 
+  color: #000;
   flex-grow: 1;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
-
 
 .comment-icons {
   display: flex;
-  gap: 10px; 
+  gap: 10px;
 }
 
 ion-icon {
   --color: #FF7F50;
   cursor: pointer;
 }
+
 .image-preview {
   max-width: 100%;
   height: auto;
@@ -168,3 +186,82 @@ ion-icon {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+.action-icons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.action-icons ion-button {
+  --size: 40px;
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.action-icons ion-button {
+  --size: 40px;
+  --background: #FF7F50;
+  --color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icons .image-preview {
+  max-width: 80px;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.comment-image-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.comment-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.image-modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: hidden;
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
