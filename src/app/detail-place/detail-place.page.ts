@@ -204,10 +204,11 @@ export class DetailPlacePage implements OnInit {
     this.selectedImage = imagen;  // Asigna la URL de la imagen al modal
     console.log(imagen)
   }*/
+ /*
     showImage(imagen: string) {
       // Usar el enrutador para redirigir a la página dplay_image pasando el parámetro imagen
       console.log(imagen)
       this.router.navigate(['/dplay-imagen'], { queryParams: { image: imagen } });
-    } 
+    } */
   
 }

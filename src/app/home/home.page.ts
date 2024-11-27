@@ -48,10 +48,14 @@ export class HomePage {
     await this.storageService.clear()
     this.router.navigate(['/splash'])
   }
-
+/*
   onCityClick(cityName: string) {
     console.log('Ciudad seleccionada:', cityName);
     this.router.navigate(['/city-map']);
-  }
+  }*/
+    onCityClick(cityName: string) {
+      console.log('Ciudad seleccionada:', cityName);
+      this.router.navigate(['/city-map'], { queryParams: { city: cityName } });
+    }
 }
 

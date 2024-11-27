@@ -44,7 +44,8 @@
       <ion-item *ngFor="let comentario of currentComentarios">
         <!-- Nombre de usuario y texto del comentario -->
         <ion-label>
-          <p class="comment-user-name">{{ comentario.usuario }}:</p>
+          <img *ngIf="comentario.imagen" [src]="comentario.imagen" alt="Imagen del comentario" class="comment-image" />
+          <p class="comment-user-name"><strong>{{ comentario.usuario }}:</strong></p>
           <p *ngIf="!comentario.isEditing">{{ comentario.texto }}</p>
           <ion-input
             *ngIf="comentario.isEditing"
@@ -66,9 +67,10 @@
           </ion-button>
 
           <!-- Botón verde de imagen adjunta (solo si el comentario tiene imagen) -->
-          <ion-button color="success" *ngIf="comentario.imagen" title="Comentario con imagen" (click)="showImage(comentario.imagen)">
+          <!-- YA NO ES UTILIZADO
+          <ion-button color="success" *ngIf="comentario.imagen" title="Comentario con imagen">
             <ion-icon name="image"></ion-icon>
-          </ion-button>
+          </ion-button>-->
         </ion-buttons>
       </ion-item>
     </ion-list>
