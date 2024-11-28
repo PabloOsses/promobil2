@@ -57,5 +57,9 @@ export class HomePage {
       console.log('Ciudad seleccionada:', cityName);
       this.router.navigate(['/city-map'], { queryParams: { city: cityName } });
     }
+    onNearbyClick() {
+      //console.log('nuevo boton ');
+      this.router.navigate(['/cerca-de-mi']);  // Navegar a la vista 'nearby'
+    }
 }
 

@@ -36,6 +36,10 @@ const routes: Routes = [
     path: 'dplay-imagen',
     loadChildren: () => import('./dplay-imagen/dplay-imagen.module').then( m => m.DplayImagenPageModule)
   },
+  {
+    path: 'cerca-de-mi',
+    loadChildren: () => import('./cerca-de-mi/cerca-de-mi.module').then( m => m.CercaDeMiPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { AttractionsService } from 'src/managers/attractionList';
 import * as L from 'leaflet';
 
 @Component({
@@ -12,66 +13,87 @@ export class CityMapPage implements OnInit {
 
   usuario: string = '';
   map: L.Map;
+  city: string = ''; // Ciudad recibida como parámetro
+  
+  attractions: any = {}; // Declaración de la propiedad 'attractions'
 
-  // Coordenadas e íconos para atracciones de París
-  private attractions = [
-    { name: 'Torre Eiffel', lat: 48.8584, lng: 2.2945, iconUrl: '/assets/lugar_historico/icon_eifel.png' },
-    { name: 'Museo del Louvre', lat: 48.8606, lng: 2.3376, iconUrl: '/assets/lugar_historico/icon_lour.png' },
-    { name: 'Catedral de Notre Dame', lat: 48.8527, lng: 2.3506, iconUrl: '/assets/lugar_historico/icon_notre.png' }
-  ];
+  
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, 
+    private route: ActivatedRoute,
+    
+    private attractionsService: AttractionsService) {}
 
   ngOnInit() {
     //this.initializeMap();
-    this.initializeMap()
+    this.route.queryParams.subscribe(params => {
+      this.city = params['city'] || 'París'; // Por defecto "París"
+      this.initializeMap();
+      this.loadAttractions();
+    });
   }
 
   private initializeMap() {
-    // Esto es para inicializar el mapa en paris
-    this.map = L.map('mapId').setView([48.8566, 2.3522], 13);
-
-    // Añadir capa de mapa de OpenStreetMap
+    const defaultLat = 0; //Estos valores predetermiandos son solo para inicio, luego cambian
+    const defaultLng = 0;
+  
+    this.map = L.map('mapId').setView([defaultLat, defaultLng], 13);
+  
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
     }).addTo(this.map);
+  }
 
-    /*Supuestamente añade marcadores con íconos 
-    personalizados y botón circular en el popup
-    */
-    this.attractions.forEach(attraction => {
+  private loadAttractions() {
+    // Leer atracciones de Firebase segun ciudad seleccionada
+    this.attractionsService.getAttractions(this.city).subscribe(attractions => {
+      if (attractions) {
+        this.attractions = attractions;
+        this.map.setView([this.attractions.latitude, this.attractions.longitude], 13); // Actualizar vista del mapa
+        this.addMarkers(attractions);
+      }
+    });
+  }
+  private addMarkers(attractions: any) {
+    Object.keys(attractions).forEach(key => {
+      const attraction = attractions[key];
       const customIcon = L.icon({
         iconUrl: attraction.iconUrl,
-        //iconSize: [32, 32],
         iconSize: [70, 70],
         iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
+        popupAnchor: [0, -32],
       });
-      // el pop up solo aparece al volver a esta vista desde el detalle
-      //por alguna razon 
-      const marker = L.marker([attraction.lat, attraction.lng], { icon: customIcon })
+
+      const marker = L.marker([attraction.latitude, attraction.longitude], { icon: customIcon })
         .addTo(this.map)
         .bindPopup(`
           <div style="text-align: center;">
-            <b>${attraction.name}</b><br>
+            <b>${key}</b><br>
             <button 
               class="circular-button" 
-              onclick="window.dispatchEvent(new CustomEvent('attractionClick', { detail: '${attraction.name}' }))">
+              onclick="window.dispatchEvent(new CustomEvent('attractionClick', { detail: '${key}' }))">
               ➔
             </button>
           </div>
         `);
 
       marker.on('click', () => {
-        this.onAttractionClick(attraction.name);
+        this.onAttractionClick(key);
       });
     });
   }
-
   private onAttractionClick(name: string) {
     // Navegar a la página de detalles de la atracción
-    this.router.navigate(['/detail-place'], { queryParams: { attraction: name } });
+    //vamos a pasar tanto el nombre de la atraccion como el nombre de la ciudad
+    /*dejemos este comentario como testimonio de que apenas comprendemos 
+    bases de datos no relacionales */
+    this.router.navigate(['/detail-place'], { 
+      queryParams: { 
+        attraction: name, 
+        city: this.city  // Pasamos el nombre de la ciudad como parámetro
+      }
+    });
   }
 
   // COdigo para borrar el mapa al salir de la vista

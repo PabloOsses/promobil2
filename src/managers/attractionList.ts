@@ -12,4 +12,8 @@ export class AttractionsService {
   getAttractions(city: string): Observable<any> {
     return this.db.object(`attractions/${city}`).valueChanges();
   }
+  // Obtener una atracción específica
+  getAttractionDetails(city: string, attractionName: string): Observable<any> {
+    return this.db.object(`attractions/${city}/${attractionName}`).valueChanges();
+  }
 }

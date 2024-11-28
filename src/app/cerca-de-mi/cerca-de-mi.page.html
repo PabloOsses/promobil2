@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>CERCA DE MI</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Mostrar las coordenadas si están disponibles -->
+  <div *ngIf="latitude && longitude">
+    <p>Tu ubicación actual:</p>
+    <p>Latitud: {{ latitude }}</p>
+    <p>Longitud: {{ longitude }}</p>
+  </div>
+
+  <!-- Mostrar el mensaje de error si algo sale mal -->
+  <div *ngIf="errorMessage">
+    <p style="color: red;">{{ errorMessage }}</p>
+  </div>
+</ion-content>

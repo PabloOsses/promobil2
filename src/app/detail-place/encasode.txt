@@ -1,0 +1,20 @@
+ attractions = {
+    'Torre Eiffel': {
+      imageUrl: 'assets/lugar_historico/eifel.jpg',
+      description: 'La Torre Eiffel es un famoso icono de París, construida de hierro forjado.',
+      latitude: 48.8584,
+      longitude: 2.2945,
+    },
+    'Museo del Louvre': {
+      imageUrl: 'assets/lugar_historico/louvre.jpg',
+      description: 'El Museo del Louvre es uno de los museos más grandes y famosos del mundo.',
+      latitude: 48.8606,
+      longitude: 2.3376,
+    },
+    'Catedral de Notre Dame': {
+      imageUrl: 'assets/lugar_historico/notre_dame.jpg',
+      description: 'Notre Dame es una catedral famosa en París, conocida por su arquitectura gótica y su rica historia.',
+      latitude: 48.8529,
+      longitude: 2.3500,
+    },
+  };

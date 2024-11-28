@@ -5,6 +5,7 @@ import { StorageService } from 'src/managers/StorageService';
 import { ItemCrudService } from 'src/managers/item_crud_service';
 import { GeolocationService } from 'src/managers/geolocationService';
 import { ImageService } from 'src/managers/imageServise';
+import { AttractionsService } from 'src/managers/attractionList';
 import { Usuario } from 'src/app/model/usuario.model';
 
 @Component({
@@ -13,33 +14,16 @@ import { Usuario } from 'src/app/model/usuario.model';
   styleUrls: ['./detail-place.page.scss'],
 })
 export class DetailPlacePage implements OnInit {
-  attractions = {
-    'Torre Eiffel': {
-      imageUrl: 'assets/lugar_historico/eifel.jpg',
-      description: 'La Torre Eiffel es un famoso icono de París, construida de hierro forjado.',
-      latitude: 48.8584,
-      longitude: 2.2945,
-    },
-    'Museo del Louvre': {
-      imageUrl: 'assets/lugar_historico/louvre.jpg',
-      description: 'El Museo del Louvre es uno de los museos más grandes y famosos del mundo.',
-      latitude: 48.8606,
-      longitude: 2.3376,
-    },
-    'Catedral de Notre Dame': {
-      imageUrl: 'assets/lugar_historico/notre_dame.jpg',
-      description: 'Notre Dame es una catedral famosa en París, conocida por su arquitectura gótica y su rica historia.',
-      latitude: 48.8529,
-      longitude: 2.3500,
-    },
-  };
 
   email: string = '';
   userName: string = '';
   isFlipped: boolean = false;
   attractionName: string;
+  cityName: string;
   imageUrl: string;
   description: string;
+  latitude: number;
+  longitude: number;
   currentComentarios: any[] = [];
   isAddingComment: boolean = false;
   newCommentText: string = '';
@@ -56,18 +40,42 @@ export class DetailPlacePage implements OnInit {
     private storageService: StorageService,
     private itemCrudService: ItemCrudService,
     private geolocationService: GeolocationService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private attractionsService: AttractionsService  
   ) {}
 
   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.attractionName = params['attraction'];
-      this.setAttractionDetails(this.attractionName);
+      this.cityName = params['city'];
+      this.loadAttractionDetails();
+      //this.setAttractionDetails(this.attractionName);
       this.loadData();
       this.loadComments();
       this.getUserLocation();
     });
   }
+
+  // Cargar los detalles de la atracción desde Firebase
+  async loadAttractionDetails() {
+    this.attractionsService.getAttractionDetails(this.cityName, this.attractionName).subscribe(
+      attraction => {
+        if (attraction) {
+          this.imageUrl = attraction.imageUrl;
+          this.description = attraction.description;
+          this.latitude = attraction.latitude;
+          this.longitude = attraction.longitude;
+        } else {
+          console.error('No se encontraron detalles para la atracción:', this.attractionName);
+          this.router.navigate(['/']);
+        }
+      },
+      error => {
+        console.error('Error al cargar los detalles de la atracción:', error);
+      }
+    );
+  }
+  
 
   async getUserLocation() {
     try {
@@ -79,24 +87,22 @@ export class DetailPlacePage implements OnInit {
       console.error('Error obteniendo ubicación:', error);
     }
   }
-
+  
+  // Calcular el tiempo estimado para llegar a la atracción
   calculateTravelTime() {
-    const attraction = this.attractions[this.attractionName];
-    if (!attraction) {
-      console.error('Atracción no encontrada');
-      return;
-    }
+    if (!this.latitude || !this.longitude) return;
     const distancia = this.calcularDistancia(
       this.userLatitude,
       this.userLongitude,
-      attraction.latitude,
-      attraction.longitude
+      this.latitude,
+      this.longitude
     );
     const velocidadPromedio = 5;
     const tiempoHoras = distancia / velocidadPromedio;
     this.estimatedDays = Math.round(tiempoHoras / 24);
   }
 
+  // Función para calcular la distancia entre dos puntos geográficos
   calcularDistancia(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const R = 6371;
     const dLat = this.degreesToRadians(lat2 - lat1);
@@ -109,10 +115,12 @@ export class DetailPlacePage implements OnInit {
     return R * c;
   }
 
+  // Convertir grados a radianes
   degreesToRadians(degrees: number): number {
     return degrees * (Math.PI / 180);
   }
 
+  // Cargar los datos del usuario
   async loadData() {
     const email = await this.storageService.get('email');
     this.email = email;
@@ -125,16 +133,7 @@ export class DetailPlacePage implements OnInit {
     });
   }
 
-  setAttractionDetails(name: string) {
-    const attraction = this.attractions[name];
-    if (attraction) {
-      this.imageUrl = attraction.imageUrl;
-      this.description = attraction.description;
-    } else {
-      this.router.navigate(['/']);
-    }
-  }
-
+  // Cargar los comentarios de la atracción
   loadComments() {
     this.commentsService.getComments(this.attractionName).subscribe(comments => {
       this.currentComentarios = comments.map(comment => ({
@@ -152,6 +151,7 @@ export class DetailPlacePage implements OnInit {
     this.isAddingComment = true;
   }
 
+  // Cargar la imagen desde la galería
   async addImage() {
     const result = await this.imageService.getImageFromGallery();
     if (result.success && result.imageUrl) {
@@ -159,6 +159,7 @@ export class DetailPlacePage implements OnInit {
     }
   }
 
+  // Enviar comentario
   submitComment() {
     if (this.newCommentText.trim()) {
       const comment = {
@@ -178,10 +179,12 @@ export class DetailPlacePage implements OnInit {
     }
   }
 
+  // Editar comentario
   editComment(comentario: any) {
     comentario.isEditing = true;
   }
 
+  // Enviar edición del comentario
   submitEdit(comentario: any) {
     if (comentario.texto.trim()) {
       this.commentsService.updateComment(this.attractionName, comentario.key, comentario.texto).then(() => {
@@ -190,6 +193,7 @@ export class DetailPlacePage implements OnInit {
     }
   }
 
+  // Eliminar comentario
   deleteComment(commentKey: string, comentario: any) {
     if (comentario.usuario === this.userName) {
       this.commentsService.deleteComment(this.attractionName, commentKey).then(() => {
@@ -197,18 +201,4 @@ export class DetailPlacePage implements OnInit {
       });
     }
   }
-
-  // Método para mostrar la imagen en el modal
-  /*
-  showImage(imagen: string) {
-    this.selectedImage = imagen;  // Asigna la URL de la imagen al modal
-    console.log(imagen)
-  }*/
- /*
-    showImage(imagen: string) {
-      // Usar el enrutador para redirigir a la página dplay_image pasando el parámetro imagen
-      console.log(imagen)
-      this.router.navigate(['/dplay-imagen'], { queryParams: { image: imagen } });
-    } */
-  
 }
