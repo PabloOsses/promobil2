@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'cerca-de-mi',
     loadChildren: () => import('./cerca-de-mi/cerca-de-mi.module').then( m => m.CercaDeMiPageModule)
   },
+  {
+    path: 'cerca-form',
+    loadChildren: () => import('./cerca-form/cerca-form.module').then( m => m.CercaFormPageModule)
+  },
 ];
 
 @NgModule({

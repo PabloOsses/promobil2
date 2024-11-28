@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar Lugar Histórico</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input [(ngModel)]="newPlaceName" placeholder="Nombre del lugar" required></ion-input>
+  <ion-textarea [(ngModel)]="newPlaceDescription" placeholder="Breve descripción" required></ion-textarea>
+
+  <ion-button (click)="addImage()">Seleccionar Imagen</ion-button>
+  <ion-img *ngIf="newPlaceImage" [src]="newPlaceImage"></ion-img>
+
+  <ion-button expand="full" (click)="submitNewPlace()">Guardar lugar histórico</ion-button>
+</ion-content>
