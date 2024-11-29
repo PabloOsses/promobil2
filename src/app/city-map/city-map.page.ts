@@ -34,7 +34,7 @@ export class CityMapPage implements OnInit {
   }
 
   private initializeMap() {
-    const defaultLat = 0; //Estos valores predetermiandos son solo para inicio, luego cambian
+    const defaultLat = 0; // Valores predeterminados para el inicio
     const defaultLng = 0;
   
     this.map = L.map('mapId').setView([defaultLat, defaultLng], 13);
@@ -43,6 +43,11 @@ export class CityMapPage implements OnInit {
       maxZoom: 18,
       attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
     }).addTo(this.map);
+  
+    // Asegúrate de invalidar el tamaño del mapa después de un pequeño retraso
+    setTimeout(() => {
+      this.map.invalidateSize();
+    }, 200); // Ajusta el tiempo si es necesario
   }
 
   private loadAttractions() {
