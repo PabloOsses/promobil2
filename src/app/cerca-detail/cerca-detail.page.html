@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/cerca-de-mi"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ place?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding background-image">
+  <div *ngIf="place; else loading">
+    <img [src]="place.image" alt="{{ place.name }}" class="place-image" />
+    <h1>{{ place.name }}</h1>
+    <p>{{ place.description }}</p>
+    <p><strong>Latitud:</strong> {{ place.latitude }}</p>
+    <p><strong>Longitud:</strong> {{ place.longitude }}</p>
+  </div>
+
+  <!-- Mensaje de carga -->
+  <ng-template #loading>
+    <ion-spinner></ion-spinner>
+    <p>Cargando detalles...</p>
+  </ng-template>
+</ion-content>

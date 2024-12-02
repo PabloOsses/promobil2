@@ -43,13 +43,20 @@ export class CercaDeMiPage implements OnInit {
   }
 
   // Cargar lugares históricos desde Firebase usando LugarCustom
+  /*
   loadPlaces() {
     // Obtener lugares históricos desde Firebase a través del servicio LugarCustom
     this.lugarCustom.getLugares().subscribe(places => {
       this.places = places;
       this.addMarkers(); // Agregar marcadores al mapa
     });
-  }
+  }*/
+    loadPlaces() {
+      this.lugarCustom.getLugares().subscribe(places => {
+        this.places = places; // Los datos ahora incluyen `id`
+        this.addMarkers(); // Agregar marcadores al mapa
+      });
+    }
 
   // Inicializar el mapa de Leaflet
   initializeMap() {
@@ -72,26 +79,30 @@ export class CercaDeMiPage implements OnInit {
     this.places.forEach(place => {
       if (place.latitude && place.longitude) {
         const customIcon = L.icon({
-          iconUrl: 'assets/marker-icon.png', // Usa una imagen personalizada para el marcador
+          iconUrl: 'assets/marker-icon.png',
           iconSize: [32, 32],
           iconAnchor: [16, 32],
           popupAnchor: [0, -32],
-          shadowUrl: 'assets/marker-shadow.png', // Ruta de la sombra del marcador
-          shadowSize: [41, 41],  // Tamaño de la sombra
-          shadowAnchor: [12, 41]  // Punto de anclaje de la sombra
+          shadowUrl: 'assets/marker-shadow2.jpg',
+          shadowSize: [41, 41],
+          shadowAnchor: [12, 41],
         });
-
-        L.marker([place.latitude, place.longitude], { icon: customIcon })
+  
+        const marker = L.marker([place.latitude, place.longitude], { icon: customIcon })
           .addTo(this.map)
-          .bindPopup(`
-            <b>${place.name}</b><br>
-            ${place.description}<br>
-            <img src="${place.image}" width="100" />
-          `);
+          .bindPopup(`<b>${place.name}</b><br>${place.description}<br><img src="${place.image}" width="100" />`);
+  
+        // Evento de clic para navegar a la vista de detalles
+        marker.on('click', () => {
+          this.goToPlaceDetails(place.id); // Usa el ID del lugar
+        });
       }
     });
   }
-
+  goToPlaceDetails(placeId: string) {
+    console.log("DAME MI ID: "+placeId)
+    this.router.navigate(['/cerca-detail', placeId]); // Navega a la ruta 'detail-place' pasando el ID del lugar
+  }
   // Navegar a la página de agregar lugar
   goToCercaForm() {
     this.router.navigate(['/cerca-form']); // Navegar a la página "cerca-form"

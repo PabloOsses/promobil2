@@ -44,6 +44,20 @@ const routes: Routes = [
     path: 'cerca-form',
     loadChildren: () => import('./cerca-form/cerca-form.module').then( m => m.CercaFormPageModule)
   },
+  {
+    path: 'cerca-detail',
+    loadChildren: () => import('./cerca-detail/cerca-detail.module').then( m => m.CercaDetailPageModule)
+  },
+  /*sep, necesitamos esto al parecer, no recuerdo como lo solucionamos la otra ves, tal ves de una forma
+  mas inteligente*/
+  {
+    path: 'cerca-detail/:id',
+    loadChildren: () =>
+      import('./cerca-detail/cerca-detail.module').then(
+        (m) => m.CercaDetailPageModule
+      ),
+  }
+
 ];
 
 @NgModule({
