@@ -13,9 +13,9 @@ export class CityMapPage implements OnInit {
 
   usuario: string = '';
   map: L.Map;
-  city: string = ''; // Ciudad recibida como parámetro
+  city: string = ''; 
   
-  attractions: any = {}; // Declaración de la propiedad 'attractions'
+  attractions: any = {}; 
 
   
 
@@ -27,14 +27,14 @@ export class CityMapPage implements OnInit {
   ngOnInit() {
     //this.initializeMap();
     this.route.queryParams.subscribe(params => {
-      this.city = params['city'] || 'París'; // Por defecto "París"
+      this.city = params['city'] || 'París'; 
       this.initializeMap();
       this.loadAttractions();
     });
   }
 
   private initializeMap() {
-    const defaultLat = 0; // Valores predeterminados para el inicio
+    const defaultLat = 0;
     const defaultLng = 0;
   
     this.map = L.map('mapId').setView([defaultLat, defaultLng], 13);
@@ -44,18 +44,18 @@ export class CityMapPage implements OnInit {
       attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
     }).addTo(this.map);
   
-    // Asegúrate de invalidar el tamaño del mapa después de un pequeño retraso
+    /*sin este trozo de codigo el mapa no se despliega correctamente */
     setTimeout(() => {
-      this.map.invalidateSize();
-    }, 200); // Ajusta el tiempo si es necesario
+      this.map.invalidateSize(); 
+    }, 200); 
   }
 
   private loadAttractions() {
-    // Leer atracciones de Firebase segun ciudad seleccionada
+    // se llen atracciones desde firebase segun ciudad seleccionada
     this.attractionsService.getAttractions(this.city).subscribe(attractions => {
       if (attractions) {
         this.attractions = attractions;
-        this.map.setView([this.attractions.latitude, this.attractions.longitude], 13); // Actualizar vista del mapa
+        this.map.setView([this.attractions.latitude, this.attractions.longitude], 13); 
         this.addMarkers(attractions);
       }
     });
@@ -90,7 +90,6 @@ export class CityMapPage implements OnInit {
   }
   private onAttractionClick(name: string) {
     // Navegar a la página de detalles de la atracción
-    //vamos a pasar tanto el nombre de la atraccion como el nombre de la ciudad
     /*dejemos este comentario como testimonio de que apenas comprendemos 
     bases de datos no relacionales */
     this.router.navigate(['/detail-place'], { 
@@ -102,7 +101,7 @@ export class CityMapPage implements OnInit {
   }
 
   // COdigo para borrar el mapa al salir de la vista
-  //comentado porque es redundante, por ahora
+  //comentado porque es redundante, (mejor dicho, no parece interferir)
   /*
   ionViewDidLeave() {
     if (this.map) {

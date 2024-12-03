@@ -7,6 +7,7 @@ import { GeolocationService } from 'src/managers/geolocationService';
 import { ImageService } from 'src/managers/imageServise';
 import { AttractionsService } from 'src/managers/attractionList';
 import { Usuario } from 'src/app/model/usuario.model';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detail-place',
@@ -31,7 +32,7 @@ export class DetailPlacePage implements OnInit {
   userLongitude: number = 0;
   estimatedDays: number = 0;
   attachedImage: string | null = null;
-  selectedImage: string = '';  // Variable para manejar la imagen seleccionada para mostrar en el modal
+  selectedImage: string = '';  
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +42,8 @@ export class DetailPlacePage implements OnInit {
     private itemCrudService: ItemCrudService,
     private geolocationService: GeolocationService,
     private imageService: ImageService,
-    private attractionsService: AttractionsService  
+    private attractionsService: AttractionsService,
+    private actionSheetController: ActionSheetController  
   ) {}
 
   async ngOnInit() {
@@ -56,7 +58,7 @@ export class DetailPlacePage implements OnInit {
     });
   }
 
-  // Cargar los detalles de la atracción desde Firebase
+  // detalles de la atraccion desde Firebase
   async loadAttractionDetails() {
     this.attractionsService.getAttractionDetails(this.cityName, this.attractionName).subscribe(
       attraction => {
@@ -88,7 +90,8 @@ export class DetailPlacePage implements OnInit {
     }
   }
   
-  // Calcular el tiempo estimado para llegar a la atracción
+  //  tiempo estimado para llegar a la atraccion (desde carreta)
+  /*ESTA FUNCIONALIDAD SE QUEDAN ESTO NO ES NEGOCIABLE */
   calculateTravelTime() {
     if (!this.latitude || !this.longitude) return;
     const distancia = this.calcularDistancia(
@@ -102,7 +105,7 @@ export class DetailPlacePage implements OnInit {
     this.estimatedDays = Math.round(tiempoHoras / 24);
   }
 
-  // Función para calcular la distancia entre dos puntos geográficos
+  // fromula de ranve
   calcularDistancia(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const R = 6371;
     const dLat = this.degreesToRadians(lat2 - lat1);
@@ -115,12 +118,12 @@ export class DetailPlacePage implements OnInit {
     return R * c;
   }
 
-  // Convertir grados a radianes
+  // grados a radianes
   degreesToRadians(degrees: number): number {
     return degrees * (Math.PI / 180);
   }
 
-  // Cargar los datos del usuario
+  // carga datos usuario
   async loadData() {
     const email = await this.storageService.get('email');
     this.email = email;
@@ -133,7 +136,7 @@ export class DetailPlacePage implements OnInit {
     });
   }
 
-  // Cargar los comentarios de la atracción
+  // Carga comentarios  atracción
   loadComments() {
     this.commentsService.getComments(this.attractionName).subscribe(comments => {
       this.currentComentarios = comments.map(comment => ({
@@ -151,15 +154,49 @@ export class DetailPlacePage implements OnInit {
     this.isAddingComment = true;
   }
 
-  // Cargar la imagen desde la galería
-  async addImage() {
+  /*opciones de seleccion de imagen*/ 
+  async presentImageOptions() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Seleccionar Imagen',
+      buttons: [
+        {
+          text: 'Usar Cámara',
+          icon: 'camera',
+          handler: async () => {
+            await this.addImageFromCamera(); // para usar camara
+          },
+        },
+        {
+          text: 'Elegir de la Galería',
+          icon: 'image',
+          handler: async () => {
+            await this.addImageFromGallery(); // para usar galeria
+          },
+        },
+        {
+          text: 'Cancelar',
+          icon: 'close',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    await actionSheet.present();
+  }
+  async addImageFromGallery() {
     const result = await this.imageService.getImageFromGallery();
     if (result.success && result.imageUrl) {
       this.attachedImage = result.imageUrl;
     }
   }
+  async addImageFromCamera() {
+    const result = await this.imageService.getImageFromCamera();
+    if (result.success && result.imageUrl) {
+      this.attachedImage = result.imageUrl;
+    }
+  }
 
-  // Enviar comentario
+  // enviar comentario
   submitComment() {
     if (this.newCommentText.trim()) {
       const comment = {
@@ -179,12 +216,12 @@ export class DetailPlacePage implements OnInit {
     }
   }
 
-  // Editar comentario
+  // editar comentario
   editComment(comentario: any) {
     comentario.isEditing = true;
   }
 
-  // Enviar edición del comentario
+  // enviar edicion del comentario
   submitEdit(comentario: any) {
     if (comentario.texto.trim()) {
       this.commentsService.updateComment(this.attractionName, comentario.key, comentario.texto).then(() => {
@@ -193,7 +230,7 @@ export class DetailPlacePage implements OnInit {
     }
   }
 
-  // Eliminar comentario
+  // eliminar comentario
   deleteComment(commentKey: string, comentario: any) {
     if (comentario.usuario === this.userName) {
       this.commentsService.deleteComment(this.attractionName, commentKey).then(() => {

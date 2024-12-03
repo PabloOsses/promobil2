@@ -1,3 +1,4 @@
+/*VISTA OBSOLETA, NO USADA IGNORAR*/ 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -12,8 +13,8 @@ export class DplayImagenPage implements OnInit {
   ngOnInit() {
     // Obtener el parámetro 'image' de la URL
     this.route.queryParams.subscribe(params => {
-      this.selectedImage = params['image'];  // Asignar el valor del parámetro a la propiedad selectedImage
-      console.log(this.selectedImage);  // Imprimir la URL de la imagen
+      this.selectedImage = params['image']; 
+      console.log(this.selectedImage);  
     });
 
 }}

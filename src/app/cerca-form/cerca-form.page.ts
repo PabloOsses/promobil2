@@ -22,10 +22,10 @@ export class CercaFormPage {
     private lugarCustom: lugarCustom, 
     private geolocationService: GeolocationService,
     private router: Router,
-    private actionSheetController: ActionSheetController // Se añade el ActionSheetController
+    private actionSheetController: ActionSheetController 
   ) { }
 
-  // Ubicación actual del usuario
+  // ubicacion actual del usuario
   async getUserLocation() {
     try {
       const position = await this.geolocationService.getCurrentLocation();
@@ -36,7 +36,7 @@ export class CercaFormPage {
     }
   }
 
-  // Mostrar opciones para seleccionar imagen
+  // opciones para seleccionar imagen
   async presentImageOptions() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Seleccionar Imagen',
@@ -45,14 +45,14 @@ export class CercaFormPage {
           text: 'Usar Cámara',
           icon: 'camera',
           handler: async () => {
-            await this.addImageFromCamera(); // Llama a la función para usar la cámara
+            await this.addImageFromCamera(); 
           },
         },
         {
           text: 'Elegir de la Galería',
           icon: 'image',
           handler: async () => {
-            await this.addImageFromGallery(); // Llama a la función para usar la galería
+            await this.addImageFromGallery(); 
           },
         },
         {
@@ -66,7 +66,7 @@ export class CercaFormPage {
     await actionSheet.present();
   }
 
-  // Agregar una imagen desde la galería
+  // agrega desde la galeria
   async addImageFromGallery() {
     const result = await this.imageService.getImageFromGallery();
     if (result.success && result.imageUrl) {
@@ -74,7 +74,7 @@ export class CercaFormPage {
     }
   }
 
-  // Agregar una imagen desde la cámara
+  // agrega desde la camara
   async addImageFromCamera() {
     const result = await this.imageService.getImageFromCamera();
     if (result.success && result.imageUrl) {
@@ -82,9 +82,9 @@ export class CercaFormPage {
     }
   }
 
-  // Función para enviar el nuevo lugar histórico
+  // enviar el nuevo lugar histórico
   async submitNewPlace() {
-    // Primero obtenemos la ubicación
+    // la ubicación
     await this.getUserLocation();
 
     if (this.newPlaceName.trim() && this.newPlaceDescription.trim()) {
@@ -99,7 +99,7 @@ export class CercaFormPage {
       this.lugarCustom.savePlace(newPlace);
       console.log('Nuevo lugar histórico guardado:', newPlace);
       
-      // Redirigir al mapa de lugares custom
+      // ir hacia mapa de lugares custom
       this.router.navigate(['/cerca-de-mi']);
     }
   }

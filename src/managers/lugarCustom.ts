@@ -7,27 +7,18 @@ import { map } from 'rxjs/operators';
 })
 export class lugarCustom {
   constructor(private db: AngularFireDatabase) {}
-
-  /*
-  savePlace(newPlace: any) {
-    const placesRef = this.db.list('custom'); // 'custom' es la ruta donde se almacenan los lugares
-    placesRef.push(newPlace); // Agrega el nuevo lugar a la base de datos
-  }
-  getLugares(): Observable<any[]> {
-    return this.db.list('custom').valueChanges(); // 
-  }*/
     savePlace(newPlace: any) {
-      const placesRef = this.db.list('custom'); // 'custom' es la ruta donde se almacenan los lugares
-      placesRef.push(newPlace); // Agrega el nuevo lugar a la base de datos
+      const placesRef = this.db.list('custom'); 
+      placesRef.push(newPlace); 
     }
     getLugares(): Observable<any[]> {
       return this.db.list('custom').snapshotChanges().pipe(
         map(actions =>
           actions.map(a => {
-            const data = a.payload.val() as object; // Forzar el tipo de datos
+            const data = a.payload.val() as object; 
             return {
-              id: a.key, // La clave generada por Firebase
-              ...data, // Esparcir los datos del lugar
+              id: a.key, 
+              ...data, 
             };
           })
         )
@@ -37,12 +28,12 @@ export class lugarCustom {
       return this.db.object(`custom/${id}`).valueChanges();
     }
   
-    // Actualizar un lugar
+    // actualizar un lugar
     updatePlace(id: string, updatedPlace: any) {
       this.db.object(`custom/${id}`).update(updatedPlace);
     }
   
-    // Eliminar un lugar
+    // eliminar un lugar
     deletePlace(id: string) {
       this.db.object(`custom/${id}`).remove();
     }  

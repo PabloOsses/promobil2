@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 export class AttractionsService {
   constructor(private db: AngularFireDatabase) {}
 
-  // Obtener atracciones para una ciudad específica
+  //  atracciones para una ciudad específica
   getAttractions(city: string): Observable<any> {
     return this.db.object(`attractions/${city}`).valueChanges();
   }
-  // Obtener una atracción específica
+  // (mas detalle) una atracción específica
   getAttractionDetails(city: string, attractionName: string): Observable<any> {
     return this.db.object(`attractions/${city}/${attractionName}`).valueChanges();
   }

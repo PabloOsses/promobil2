@@ -21,9 +21,9 @@
   margin: 15px 0;
   text-align: center;
   font-weight: bold;
-  width: 100%; /* Asegura que el mensaje abarque el 100% del ancho disponible */
-  display: inline-block; /* Asegura que el bloque rodee correctamente el texto */
-  animation: fadeIn 0.5s ease-in-out; /* Animación suave */
+  width: 100%; 
+  display: inline-block; 
+  animation: fadeIn 0.5s ease-in-out; 
 }
 
 @keyframes fadeIn {

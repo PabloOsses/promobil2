@@ -2,10 +2,10 @@
     --background: url(/assets/backblue.png) no-repeat center center / cover;
   }
 img {
-    max-width: 80%;  /* Limita el tamaño de la imagen a un 80% del contenedor */
-    max-height: 80%; /* Limita la altura de la imagen a un 80% del contenedor */
-    border-radius: 12px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para la imagen */
+    max-width: 80%;  
+    max-height: 80%; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     display: flex;
     justify-content: center;
     align-items: center;

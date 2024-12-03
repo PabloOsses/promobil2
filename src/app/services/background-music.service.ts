@@ -1,3 +1,4 @@
+/*posiblente no utilizado porque el ruido era molesto */
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,8 +10,8 @@ export class BackgroundMusicService {
 
   constructor() {
     this.audio = new Audio('assets/music/background1.mp3');
-    this.audio.loop = true; // Hace que el audio se repita automáticamente
-    this.audio.volume = 0.5; // Controla el volumen
+    this.audio.loop = true; 
+    this.audio.volume = 0.5; 
   }
 
   startBackgroundMusic() {

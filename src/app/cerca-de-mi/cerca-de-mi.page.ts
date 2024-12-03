@@ -52,39 +52,50 @@ export class CercaDeMiPage implements OnInit {
 
   // mapa de leaflet
   initializeMap() {
-    this.map = L.map('mapId').setView([this.latitude, this.longitude], 13); // Establecer la vista del mapa en la ubicación del usuario
-    
-    // capa de mapa de OpenStreetMap
+    // Si el mapa ya está inicializado, elimínalo
+    if (this.map) {
+      this.map.remove(); // Esto destruye el mapa actual
+    }
+  
+    // Inicializa el mapa con la ubicación del usuario
+    this.map = L.map('mapId').setView([this.latitude, this.longitude], 13);
+  
+    // Capa de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a>',
       maxZoom: 18,
     }).addTo(this.map);
-
-    /*marcador en la ubicación del usuario icono customm sino leaflet da error
-    la imagen del shadow sera mas pequeña (asi quedara tapada por la real)*/
-    
+  
+    // Ícono personalizado para la ubicación del usuario
     const userIcon = L.icon({
       iconUrl: 'assets/posActual.png', 
       iconSize: [42, 41], 
       iconAnchor: [12, 41], 
       popupAnchor: [1, -34], 
       shadowUrl: 'assets/marker-shadow2.jpg', 
-      shadowSize: [32, 32], 
+      shadowSize: [32, 32],
     });
-    
+  
     this.marker = L.marker([this.latitude, this.longitude], { icon: userIcon })
       .addTo(this.map)
-      .bindPopup('Tu ubicacion')
+      .bindPopup('Tu ubicación')
       .openPopup();
   }
+  
 
-  // Agregar marcadores para los lugares históricos en el mapa
+  // marcadores para los lugares CUSTOM en el mapa
   addMarkers() {
     /*por alguna razon leaftlet pide algo asi como una ruta para los iconos
     y para la sombra de estos? buno lo siguiente es para setear los iconos necesariso
     estoy (casi) seguro de que esto no sucedio en detalle de los lugares en paris?
     sol: el icono de sombra se hizo mas pequeño que el principal
     esto deberia resolver el problema de los iconos que se veian extraños*/ 
+    this.map.eachLayer((layer) => {
+      if (layer instanceof L.Marker && layer !== this.marker) {
+        this.map.removeLayer(layer); // Elimina todos los marcadores, excepto el de la ubicación del usuario
+      }
+    });
+  
     this.places.forEach(place => {
       if (place.latitude && place.longitude) {
         const customIcon = L.icon({
@@ -101,9 +112,9 @@ export class CercaDeMiPage implements OnInit {
           .addTo(this.map)
           .bindPopup(`<b>${place.name}</b><br>${place.description}<br><img src="${place.image}" width="100" />`);
   
-        //  clic para navegar a la vista de detalles
+        // navegacion a detalles
         marker.on('click', () => {
-          this.goToPlaceDetails(place.id); // pasar el ID de firebase
+          this.goToPlaceDetails(place.id);
         });
       }
     });

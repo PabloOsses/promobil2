@@ -11,12 +11,12 @@
   <ion-input [(ngModel)]="newPlaceName" placeholder="Nombre del lugar" required></ion-input>
   <ion-textarea [(ngModel)]="newPlaceDescription" placeholder="Breve descripción" required></ion-textarea>
 
-  <!-- Botón para abrir el ActionSheet con opciones de imagen -->
+  <!--Este muestra las opciones para subir imagenes -->
   <ion-button expand="block" (click)="presentImageOptions()">Seleccionar Imagen</ion-button>
   
-  <!-- Mostrar la imagen seleccionada, si existe -->
+  <!--se muestra la imagen seleccionada -->
   <ion-img *ngIf="newPlaceImage" [src]="newPlaceImage"></ion-img>
 
-  <!-- Botón para guardar el lugar histórico -->
+  <!-- guardar el lugar -->
   <ion-button expand="full" (click)="submitNewPlace()">Guardar lugar histórico</ion-button>
 </ion-content>

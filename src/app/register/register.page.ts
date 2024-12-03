@@ -43,7 +43,7 @@ export class RegisterPage implements OnInit {
   goToLogin() {
     this.router.navigate(['/login']);
   }
-
+/*Segun ult evaluacion esto esta enredado.....pero funciona */
   async onRegisterButtonPressed() {
     if (this.registerForm.valid ) {
       const { username,email,password } = this.registerForm.value;
@@ -130,10 +130,6 @@ export class RegisterPage implements OnInit {
     }
   }
 }
-
-
-
-
 
 }
 

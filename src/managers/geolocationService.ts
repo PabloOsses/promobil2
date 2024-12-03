@@ -21,9 +21,11 @@ export class GeolocationService {
         }
     }
         */
+
+    /*modificado para obligar a pedir permisos, asi ya no da problemas en chrome */
     async getCurrentLocation(): Promise<{ latitude: number; longitude: number }> {
         try {
-          // Verificar y solicitar permisos
+          // verificar y solicitar permisos
           await this.checkAndRequestPermissions();
     
           const position = await Geolocation.getCurrentPosition();
