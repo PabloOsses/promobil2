@@ -11,14 +11,14 @@
 </ion-header>
 
 <ion-content class="ion-padding cities-list background-image">
-  <!-- Mostrar las ciudades con un tamaño consistente para los botones -->
+  <!--BOTON CON LAS CIUDADES -->
   <div *ngFor="let city of cities" class="city-button">
     <ion-button fill="clear" expand="block" (click)="onCityClick(city.name)" class="city-bg" [style.background-image]="'url(' + city.image + ')'">
       <span class="city-name">{{ city.name }}</span>
     </ion-button>
   </div>
 
-  <!-- Botón "Cerca de mí" con el mismo tamaño que los botones de las ciudades -->
+  <!-- BOTON CERCA DE MI-->
   <ion-button fill="clear" expand="block" (click)="onNearbyClick()" class="city-bg" [style.background-image]="'url(assets/cerca_banner.jpg)'">
     <span class="city-name">Cerca de mí</span>
   </ion-button>

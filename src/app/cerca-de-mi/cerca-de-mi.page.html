@@ -8,22 +8,22 @@
 </ion-header>
 
 <ion-content class="ion-padding background-image">
-  <!-- Mostrar el mapa -->
+  <!--esto es el mapa -->
   <div id="mapId" style="height: 300px;"></div>
 
-  <!-- Mostrar las coordenadas si están disponibles -->
+  <!--desplegar coordenadas para saber si todo va bien (cruza los dedos)-->
   <div *ngIf="latitude && longitude">
     <p>Tu ubicación actual:</p>
     <p>Latitud: {{ latitude }}</p>
     <p>Longitud: {{ longitude }}</p>
   </div>
 
-  <!-- Mostrar el mensaje de error si algo sale mal -->
+  <!--mensaje en caso de que algo salga mal  -->
   <div *ngIf="errorMessage">
     <p style="color: red;">{{ errorMessage }}</p>
   </div>
 
-  <!-- Botón '+' naranjo y redondo en la parte inferior -->
+  <!--boton para agregar lugar custom-->
   <div class="add-place-button" (click)="goToCercaForm()">
     <span>+</span>
   </div>

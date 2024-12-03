@@ -13,11 +13,13 @@ export class CercaDetailPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private lugarCustom: lugarCustom // Servicio para obtener los detalles del lugar
+    private lugarCustom: lugarCustom //manager o service que lee los lugares custom
   ) {}
 
   ngOnInit() {
-    this.placeId = this.route.snapshot.paramMap.get('id'); // Obtener el 'id' de la URL
+    /*no esoty seguro porque pero el clasico subcribe para recibir el parametro 
+    no funcionaba, pero existe snapshot y eso hizo el trabajo */
+    this.placeId = this.route.snapshot.paramMap.get('id'); 
     this.loadPlaceDetails();
   }
 
