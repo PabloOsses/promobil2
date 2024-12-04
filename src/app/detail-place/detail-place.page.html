@@ -9,14 +9,14 @@
 
 <ion-content class="background-image">
   <div class="image-container" (click)="toggleFlip()">
-    <!-- imagen lugar histórico -->
+    <!--imagen lugar histórico -->
     <div [ngClass]="{'flipped': isFlipped}" class="image-wrapper">
       <img [src]="imageUrl" alt="Nombre de la imagen" class="custom-image" />
       <div class="image-description">
         <p>{{ description }}</p>
       </div>
     </div>
-    <!-- nombre del lugar abajo de la imagen -->
+    <!--nombre del lugar abajo de la imagen -->
     <div class="image-name">
       {{ attractionName }}
     </div>
@@ -75,7 +75,7 @@
       </ion-item>
     </ion-list>
   
-    <!-- campo de entrada y boton para agregar comentario -->
+    <!--campo de entrada para agregar comentario -->
     <div class="add-comment-input" *ngIf="isAddingComment">
       <ion-input [(ngModel)]="newCommentText" placeholder="Escribe tu comentario aquí"></ion-input>
       <ion-button (click)="presentImageOptions()">
@@ -90,30 +90,11 @@
     </div>
   </div> 
 
-  <!--boton para mostrar el campo de entrada de comentario -->
+  <!--boton para agregar comentario-->
   <div class="add-comment-button" *ngIf="!isAddingComment">
     <ion-button fill="clear" (click)="showCommentInput()">
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-button>
   </div>
 
-  <!-- Vista emergente para mostrar la imagen YA NO USADO -->
-  <div class="image-modal" *ngIf="selectedImage">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Imagen adjunta</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="selectedImage = ''">
-            <ion-icon name="close"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <div class="image-modal-content">
-        <!-- Hacer clic en la imagen cierra el modal -->
-        <img [src]="selectedImage" alt="Imagen adjunta" class="modal-image" (click)="selectedImage = ''" />
-      </div>
-    </ion-content>
-  </div>
 </ion-content>
